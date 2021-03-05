@@ -9,13 +9,13 @@ import twisk.mondeIG.MondeIG;
 
 
 public class VueOutils extends TilePane implements Vue {
-    private MondeIG monde;
-    private Button bouton;
+    private final MondeIG monde;
+    private final Button bouton;
 
     public VueOutils(MondeIG monde) {
         this.monde = monde;
         monde.ajouterVue(this);
-        bouton = new Button("");
+        bouton = new Button();
         bouton.setOnAction(actionEvent -> monde.ajouter("Activite"));
         Tooltip tool = new Tooltip();
         bouton.setTooltip(tool);

@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class MondeIG implements Iterable<EtapeIG> {
-    private HashMap<String, EtapeIG> etapes;
-    private ArrayList<Vue> vues;
+    private final HashMap<String, EtapeIG> etapes;
+    private final ArrayList<Vue> vues;
 
     public MondeIG() {
         FabriqueIdentifiant fabID = FabriqueIdentifiant.getInstance();
@@ -23,11 +23,11 @@ public class MondeIG implements Iterable<EtapeIG> {
     public void ajouter(String type) {
         switch (type) {
             case "Activite":
-                System.out.println("ça marche brow");
                 FabriqueIdentifiant fabID = FabriqueIdentifiant.getInstance();
                 String id = fabID.getIdentifiantEtape();
                 ActiviteIG activite = new ActiviteIG("Activité n°" + id, id, 45, 90);
                 this.etapes.put(id, activite);
+                this.prevenirVues();
         }
     }
 
@@ -54,8 +54,8 @@ public class MondeIG implements Iterable<EtapeIG> {
     }
 
     public void prevenirVues() {
-        for (Vue vue : vues) {
-            vue.mettreAJour();
+        for (int i = 0; i < this.etapes.size(); ++i) {
+            vues.get(i).mettreAJour();
         }
     }
 
