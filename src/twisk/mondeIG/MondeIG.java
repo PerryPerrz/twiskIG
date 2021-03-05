@@ -1,15 +1,20 @@
 package twisk.mondeIG;
 
 import twisk.outils.FabriqueIdentifiant;
+import twisk.vues.Vue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class MondeIG implements Iterable<EtapeIG>{
     private HashMap<String,EtapeIG> etapes;
+    private ArrayList<Vue> vues;
 
     public MondeIG(){
         FabriqueIdentifiant fabID = FabriqueIdentifiant.getInstance();
+        etapes = new HashMap<>(10);
+        vues = new ArrayList<>(10);
         String id = fabID.getIdentifiantEtape();
         ActiviteIG activite = new ActiviteIG("Activité n°" + id,id,45,90);
         this.etapes.put(id,activite);
@@ -42,13 +47,13 @@ public class MondeIG implements Iterable<EtapeIG>{
         };
     }
 
-    /*
     public void ajouterVue(Vue v){
-
+        vues.add(v);
     }
 
-    public void prevenirVues(Vue v){
-
+    public void prevenirVues(){
+        for(Vue vue : vues){
+            vue.mettreAJour();
+        }
     }
-    */
 }
