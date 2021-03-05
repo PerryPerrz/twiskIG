@@ -1,18 +1,18 @@
 package twisk.outils;
 
 public class FabriqueIdentifiant {
+    private static final FabriqueIdentifiant instance = new FabriqueIdentifiant();
     private int noEtape;
 
-    private FabriqueIdentifiant(){
+    private FabriqueIdentifiant() {
         this.noEtape = 0;
     }
-    private static final FabriqueIdentifiant instance = new FabriqueIdentifiant();
 
-    public static FabriqueIdentifiant getInstance(){
+    public static FabriqueIdentifiant getInstance() {
         return instance;
     }
 
-    public String getIdentifiantEtape(){
+    public String getIdentifiantEtape() {
         return "" + this.noEtape++;
     }
 }

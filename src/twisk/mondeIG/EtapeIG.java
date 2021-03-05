@@ -8,7 +8,7 @@ public abstract class EtapeIG {
     protected int largeur;
     protected int hauteur;
 
-    public EtapeIG(String nom, String idf, int larg, int haut){
+    public EtapeIG(String nom, String idf, int larg, int haut) {
         this.nom = nom;
         this.identifiant = idf;
         this.posX = 0;
