@@ -16,4 +16,8 @@ public abstract class EtapeIG {
         this.largeur = larg;
         this.hauteur = haut;
     }
+
+    public String getIdentifiant() {
+        return identifiant;
+    }
 }

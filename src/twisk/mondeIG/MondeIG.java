@@ -22,7 +22,7 @@ public class MondeIG implements Iterable<EtapeIG>{
 
     public void ajouter(String type){
         switch(type){
-            case "Activité" :
+            case "Activite" :
                 FabriqueIdentifiant fabID = FabriqueIdentifiant.getInstance();
                 String id = fabID.getIdentifiantEtape();
                 ActiviteIG activite = new ActiviteIG("Activité n°" + id,id,45,90);
@@ -55,5 +55,19 @@ public class MondeIG implements Iterable<EtapeIG>{
         for(Vue vue : vues){
             vue.mettreAJour();
         }
+    }
+
+    //Fonctions nécessaires aux tests de MondeIG (fonction "ajouter", "iterator")
+
+    public int nbEtapes(){
+        int cpt = 0;
+        for(int i = 0 ; i < this.etapes.size(); ++i){
+            cpt+=1;
+        }
+        return cpt;
+    }
+
+    public String getIdentifiantEtape(String id){
+        return this.etapes.get(id).getIdentifiant();
     }
 }
