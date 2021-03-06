@@ -20,7 +20,7 @@ class MondeIGTest {
         assertEquals(monde.nbEtapes(), 1);
         monde.ajouter("Activite");
         assertEquals(monde.nbEtapes(), 2);
-        monde.ajouter("Kebab");
+        monde.ajouter("Tourcoing");
         assertEquals(monde.nbEtapes(), 2);
     }
 

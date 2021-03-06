@@ -16,7 +16,7 @@ public class MondeIG implements Iterable<EtapeIG> {
         etapes = new HashMap<>(10);
         vues = new ArrayList<>(10);
         String id = fabID.getIdentifiantEtape();
-        ActiviteIG activite = new ActiviteIG("Activité n°" + id, id, 45, 90);
+        ActiviteIG activite = new ActiviteIG("Activité n°" + id, id);
         this.etapes.put(id, activite);
     }
 
@@ -25,7 +25,7 @@ public class MondeIG implements Iterable<EtapeIG> {
             case "Activite":
                 FabriqueIdentifiant fabID = FabriqueIdentifiant.getInstance();
                 String id = fabID.getIdentifiantEtape();
-                ActiviteIG activite = new ActiviteIG("Activité n°" + id, id, 45, 90);
+                ActiviteIG activite = new ActiviteIG("Activité n°" + id, id);
                 this.etapes.put(id, activite);
                 this.prevenirVues();
         }

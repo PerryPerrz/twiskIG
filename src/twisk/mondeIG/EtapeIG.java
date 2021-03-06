@@ -1,23 +1,35 @@
 package twisk.mondeIG;
 
+import java.util.Random;
+
 public abstract class EtapeIG {
     protected String nom;
     protected String identifiant;
     protected int posX;
     protected int posY;
-    protected int largeur;
-    protected int hauteur;
 
-    public EtapeIG(String nom, String idf, int larg, int haut) {
+    public EtapeIG(String nom, String idf) {
         this.nom = nom;
         this.identifiant = idf;
-        this.posX = 0;
-        this.posY = 0;
-        this.largeur = larg;
-        this.hauteur = haut;
+        randomPositions();
+
+    }
+
+    public void randomPositions() {
+        Random random = new Random();
+        this.posX = random.nextInt(650);
+        this.posY = random.nextInt(550);
     }
 
     public String getIdentifiant() {
         return identifiant;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
     }
 }

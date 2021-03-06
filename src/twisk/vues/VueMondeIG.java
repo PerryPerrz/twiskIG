@@ -3,8 +3,7 @@ package twisk.vues;
 import javafx.scene.layout.Pane;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
-
-import java.util.Random;
+import twisk.outils.TailleComposants;
 
 public class VueMondeIG extends Pane implements Vue {
     private final MondeIG monde;
@@ -12,22 +11,24 @@ public class VueMondeIG extends Pane implements Vue {
     public VueMondeIG(MondeIG monde) {
         this.monde = monde;
         monde.ajouterVue(this);
-        Random random = new Random();
+        TailleComposants tc = TailleComposants.getInstance();
         for (EtapeIG etape : this.monde) {
             VueActiviteIG viewA = new VueActiviteIG(monde, etape);
+            viewA.setMinSize(tc.getLarg(), tc.getHaut());
             this.getChildren().add(viewA);
-            viewA.relocate(random.nextInt(650), random.nextInt(550));
+            viewA.relocate(etape.getPosX(), etape.getPosY());
         }
     }
 
     @Override
     public void mettreAJour() {
         this.getChildren().clear();
-        Random random = new Random();
+        TailleComposants tc = TailleComposants.getInstance();
         for (EtapeIG etape : this.monde) {
             VueActiviteIG viewA = new VueActiviteIG(monde, etape);
             this.getChildren().add(viewA);
-            viewA.relocate(random.nextInt(650), random.nextInt(550));
+            etape.randomPositions();
+            viewA.relocate(etape.getPosX(), etape.getPosY());
         }
     }
 }
