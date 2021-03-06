@@ -1,11 +1,11 @@
 package twisk.vues;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
-public abstract class VueEtapeIG extends Pane implements Vue {
+public abstract class VueEtapeIG extends VBox implements Vue {
     private final MondeIG monde;
     private final EtapeIG etape;
     private final Label label;

@@ -20,9 +20,10 @@ public class VueOutils extends TilePane implements Vue {
         bouton.setOnAction(actionEvent -> monde.ajouter("Activite"));
         Tooltip tool = new Tooltip();
         bouton.setTooltip(tool);
-        TailleComposants tc = TailleComposants.getInstance();
-        Image image = new Image(getClass().getResourceAsStream("/twisk/ressources/images/add.png"), tc.getTailleBouton(), tc.getTailleBouton(), true, true); //Donne le chemin à partir de src
+        TailleComposants tC = TailleComposants.getInstance();
+        Image image = new Image(getClass().getResourceAsStream("/twisk/ressources/images/add.png"), tC.getTailleBouton(), tC.getTailleBouton(), true, true); //Donne le chemin à partir de src
         ImageView icon = new ImageView(image);
+        bouton.setStyle("-fx-background-color:transparent; -fx-focus-color: transparent;");
         bouton.setGraphic(icon);
         this.getChildren().add(bouton);
     }

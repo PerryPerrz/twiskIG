@@ -10,8 +10,8 @@ public class TailleComposants {
     private final int windowY;
 
     private TailleComposants() {
-        this.larg = 50;
-        this.haut = 50;
+        this.larg = 80;
+        this.haut = 40;
         this.tailleBouton = 30;
         this.windowX = 700;
         this.windowY = 600;
