@@ -54,7 +54,7 @@ public class MondeIG implements Iterable<EtapeIG> {
     }
 
     public void prevenirVues() {
-        for (int i = 0; i < this.etapes.size(); ++i) {
+        for (int i = 0; i < this.vues.size(); ++i) {
             vues.get(i).mettreAJour();
         }
     }

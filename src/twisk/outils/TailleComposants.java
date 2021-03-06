@@ -6,11 +6,15 @@ public class TailleComposants {
     private final int larg;
     private final int haut;
     private final int tailleBouton;
+    private final int windowX;
+    private final int windowY;
 
     private TailleComposants() {
         this.larg = 50;
         this.haut = 50;
         this.tailleBouton = 30;
+        this.windowX = 700;
+        this.windowY = 600;
     }
 
     public static TailleComposants getInstance() {
@@ -27,5 +31,13 @@ public class TailleComposants {
 
     public int getTailleBouton() {
         return tailleBouton;
+    }
+
+    public int getWindowX() {
+        return windowX;
+    }
+
+    public int getWindowY() {
+        return windowY;
     }
 }
