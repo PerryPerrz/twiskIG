@@ -6,9 +6,9 @@ import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
 public abstract class VueEtapeIG extends VBox implements Vue {
-    private final MondeIG monde;
-    private final EtapeIG etape;
-    private final Label label;
+    protected final MondeIG monde;
+    protected final EtapeIG etape;
+    protected final Label label;
 
     public VueEtapeIG(MondeIG monde, EtapeIG etape) {
         this.monde = monde;

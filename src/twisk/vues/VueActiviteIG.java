@@ -18,6 +18,6 @@ public class VueActiviteIG extends VueEtapeIG implements Vue {
 
     @Override
     public void mettreAJour() {
-
+        this.relocate(etape.getPosX(), etape.getPosY());
     }
 }

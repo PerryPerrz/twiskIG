@@ -19,8 +19,8 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         pdc = new PointDeControleIG[4];
         FabriqueIdentifiant fabrik = FabriqueIdentifiant.getInstance();
 
-        for(int i = 0; i < this.pdc.length ; ++i){
-            pdc[i] = new PointDeControleIG(fabrik.getIdentifiantPdc(),this);
+        for (int i = 0; i < this.pdc.length; ++i) {
+            pdc[i] = new PointDeControleIG(fabrik.getIdentifiantPdc(), this);
         }
         randomPositions();
     }
@@ -31,10 +31,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         this.posX = random.nextInt(650);
         this.posY = random.nextInt(550);
 
-        pdc[0].setCentre(this.posX + tc.getLarg()/2,this.posY);
-        pdc[1].setCentre(this.posX + tc.getLarg()/2,this.posY + tc.getHaut());
-        pdc[2].setCentre(this.posX,this.posY + tc.getHaut()/2);
-        pdc[3].setCentre(this.posX + tc.getLarg(),this.posY + tc.getHaut()/2);
+        pdc[0].setCentre(this.posX + tc.getLarg() / 2, this.posY);
+        pdc[1].setCentre(this.posX + tc.getLarg() / 2, this.posY + tc.getHaut());
+        pdc[2].setCentre(this.posX, this.posY + tc.getHaut() / 2);
+        pdc[3].setCentre(this.posX + tc.getLarg(), this.posY + tc.getHaut() / 2);
     }
 
     public String getIdentifiant() {

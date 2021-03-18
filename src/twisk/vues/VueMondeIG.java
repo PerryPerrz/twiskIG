@@ -3,6 +3,7 @@ package twisk.vues;
 import javafx.scene.layout.Pane;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
+import twisk.mondeIG.PointDeControleIG;
 import twisk.outils.TailleComposants;
 
 public class VueMondeIG extends Pane implements Vue {
@@ -13,21 +14,36 @@ public class VueMondeIG extends Pane implements Vue {
         monde.ajouterVue(this);
         TailleComposants tC = TailleComposants.getInstance();
         for (EtapeIG etape : this.monde) {
-            VueActiviteIG viewA = new VueActiviteIG(monde, etape);
+            //On met à jour le modèle avant de mettre à jour la vue.
+            etape.randomPositions();
+            VueActiviteIG viewA = new VueActiviteIG(this.monde, etape);
             viewA.setMinSize(tC.getLarg(), tC.getHaut());
             this.getChildren().add(viewA);
-            viewA.relocate(etape.getPosX(), etape.getPosY());
+            viewA.mettreAJour();
+            for (PointDeControleIG pdc : etape) {
+                VuePointDeControleIG viewPdc = new VuePointDeControleIG(this.monde, pdc);
+                this.getChildren().add(viewPdc);
+                viewPdc.mettreAJour();
+            }
         }
     }
 
     @Override
     public void mettreAJour() {
         this.getChildren().clear();
+        TailleComposants tC = TailleComposants.getInstance();
         for (EtapeIG etape : this.monde) {
-            VueActiviteIG viewA = new VueActiviteIG(monde, etape);
-            this.getChildren().add(viewA);
+            //On met à jour le modèle avant de mettre à jour la vue.
             etape.randomPositions();
-            viewA.relocate(etape.getPosX(), etape.getPosY());
+            VueActiviteIG viewA = new VueActiviteIG(this.monde, etape);
+            viewA.setMinSize(tC.getLarg(), tC.getHaut());
+            this.getChildren().add(viewA);
+            viewA.mettreAJour();
+            for (PointDeControleIG pdc : etape) {
+                VuePointDeControleIG viewPdc = new VuePointDeControleIG(this.monde, pdc);
+                this.getChildren().add(viewPdc);
+                viewPdc.mettreAJour();
+            }
         }
     }
 }
