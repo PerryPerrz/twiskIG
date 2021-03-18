@@ -1,5 +1,8 @@
 package twisk.mondeIG;
 
+import twisk.outils.FabriqueIdentifiant;
+import twisk.outils.TailleComposants;
+
 import java.util.Random;
 
 public abstract class EtapeIG {
@@ -7,18 +10,30 @@ public abstract class EtapeIG {
     protected String identifiant;
     protected int posX;
     protected int posY;
+    protected PointDeControleIG[] pdc;
 
     public EtapeIG(String nom, String idf) {
         this.nom = nom;
         this.identifiant = idf;
-        randomPositions();
+        pdc = new PointDeControleIG[4];
+        FabriqueIdentifiant fabrik = FabriqueIdentifiant.getInstance();
 
+        for(int i = 0; i < this.pdc.length ; ++i){
+            pdc[i] = new PointDeControleIG(fabrik.getIdentifiantPdc(),this);
+        }
+        randomPositions();
     }
 
     public void randomPositions() {
+        TailleComposants tc = TailleComposants.getInstance();
         Random random = new Random();
         this.posX = random.nextInt(650);
         this.posY = random.nextInt(550);
+
+        pdc[0].setCentre(this.posX + tc.getLarg()/2,this.posY);
+        pdc[1].setCentre(this.posX + tc.getLarg()/2,this.posY + tc.getHaut());
+        pdc[2].setCentre(this.posX,this.posY + tc.getHaut()/2);
+        pdc[3].setCentre(this.posX + tc.getLarg(),this.posY + tc.getHaut()/2);
     }
 
     public String getIdentifiant() {
