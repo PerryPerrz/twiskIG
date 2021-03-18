@@ -15,4 +15,12 @@ public class PointDeControleIG {
         this.centreX = centreX;
         this.centreY = centreY;
     }
+
+    public int getCentreX() {
+        return centreX;
+    }
+
+    public int getCentreY() {
+        return centreY;
+    }
 }
