@@ -10,11 +10,13 @@ import java.util.Iterator;
 public class MondeIG implements Iterable<EtapeIG> {
     private final HashMap<String, EtapeIG> etapes;
     private final ArrayList<Vue> vues;
+    private final ArrayList<ArcIG> arcs;
 
     public MondeIG() {
         FabriqueIdentifiant fabID = FabriqueIdentifiant.getInstance();
         etapes = new HashMap<>(10);
         vues = new ArrayList<>(10);
+        arcs = new ArrayList<>(10);
         String id = fabID.getIdentifiantEtape();
         ActiviteIG activite = new ActiviteIG("Activité n°" + id, id);
         this.etapes.put(id, activite);
@@ -33,7 +35,7 @@ public class MondeIG implements Iterable<EtapeIG> {
 
     @Override
     public Iterator<EtapeIG> iterator() {
-        return new Iterator<EtapeIG>() {
+        return new Iterator<>() {
             int index = 0;
 
             @Override
@@ -71,5 +73,14 @@ public class MondeIG implements Iterable<EtapeIG> {
 
     public String getIdentifiantEtape(String id) {
         return this.etapes.get(id).getIdentifiant();
+    }
+
+    public void ajouter(PointDeControleIG pt1, PointDeControleIG pt2) {
+        ArcIG ark = new ArcIG(pt1, pt2);
+        this.arcs.add(ark);
+    }
+
+    public Iterator<ArcIG> iteratorArcs() {
+        return arcs.iterator();
     }
 }
