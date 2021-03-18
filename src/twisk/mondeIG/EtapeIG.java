@@ -3,9 +3,10 @@ package twisk.mondeIG;
 import twisk.outils.FabriqueIdentifiant;
 import twisk.outils.TailleComposants;
 
+import java.util.Iterator;
 import java.util.Random;
 
-public abstract class EtapeIG {
+public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     protected String nom;
     protected String identifiant;
     protected int posX;
@@ -46,5 +47,23 @@ public abstract class EtapeIG {
 
     public int getPosY() {
         return posY;
+    }
+
+    @Override
+    public Iterator<PointDeControleIG> iterator() {
+        return new Iterator<>() {
+
+            private int i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < pdc.length && pdc[i] != null;
+            }
+
+            @Override
+            public PointDeControleIG next() {
+                return pdc[i++];
+            }
+        };
     }
 }
