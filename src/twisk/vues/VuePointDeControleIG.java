@@ -16,6 +16,7 @@ public class VuePointDeControleIG extends Circle implements Vue {
         this.pdc = pdc;
         this.setFill(Color.SLATEBLUE);
         this.setRadius(tc.getRad());
+        this.setOnMouseClicked(ActionEvent -> monde.creationArc(pdc));
         monde.ajouterVue(this);
     }
 
@@ -25,4 +26,6 @@ public class VuePointDeControleIG extends Circle implements Vue {
         this.setCenterX(this.pdc.getCentreX());
         this.setCenterY(this.pdc.getCentreY());
     }
+
+
 }
