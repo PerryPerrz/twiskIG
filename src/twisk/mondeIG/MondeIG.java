@@ -79,6 +79,8 @@ public class MondeIG implements Iterable<EtapeIG> {
         if (!pdc1.getId().equals(pdc2.getId())) {
             ArcIG ark = new ArcIG(pdc1, pdc2);
             this.arcs.add(ark);
+        } else {
+            System.out.print("Vous ne pouvez pas créer d'arcs entre 2 points de controle identiques!");
         }
     }
 
