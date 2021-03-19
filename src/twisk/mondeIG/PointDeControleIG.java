@@ -36,4 +36,8 @@ public class PointDeControleIG {
     public boolean isClicked() {
         return this.clicked;
     }
+
+    public String getId() {
+        return id;
+    }
 }

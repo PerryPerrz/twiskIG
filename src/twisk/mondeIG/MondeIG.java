@@ -75,9 +75,11 @@ public class MondeIG implements Iterable<EtapeIG> {
         return this.etapes.get(id).getIdentifiant();
     }
 
-    public void ajouter(PointDeControleIG pt1, PointDeControleIG pt2) {
-        ArcIG ark = new ArcIG(pt1, pt2);
-        this.arcs.add(ark);
+    public void ajouter(PointDeControleIG pdc1, PointDeControleIG pdc2) {
+        if (!pdc1.getId().equals(pdc2.getId())) {
+            ArcIG ark = new ArcIG(pdc1, pdc2);
+            this.arcs.add(ark);
+        }
     }
 
     public Iterator<ArcIG> iteratorArcs() {
@@ -88,7 +90,7 @@ public class MondeIG implements Iterable<EtapeIG> {
         boolean isCreated = false;
         for (EtapeIG etape : this) {
             for (PointDeControleIG pdcIG : etape) {
-                //Je cherche dans tous les pdc si il y ne a un qui est true, le pdc en paramètre est le 2éme pdc qu'on à cliqué
+                //Je cherche dans tous les pdc si il y en a un qui est true, le pdc en paramètre est le 2éme pdc qu'on à cliqué
                 //Si j'en trouve un, cela signifie que celui en paramètre est le second
                 if (pdcIG.isClicked()) {
                     pdcIG.setClicked();
