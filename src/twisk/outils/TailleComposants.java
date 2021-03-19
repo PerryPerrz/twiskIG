@@ -8,6 +8,7 @@ public class TailleComposants {
     private final int windowX;
     private final int windowY;
     private final int rad;
+    private final int strokeWidth;
 
     private TailleComposants() {
         this.larg = 80;
@@ -15,7 +16,8 @@ public class TailleComposants {
         this.tailleBouton = 30;
         this.windowX = 700;
         this.windowY = 600;
-        this.rad = 4;
+        this.rad = 6;
+        this.strokeWidth = 4;
     }
 
     public static TailleComposants getInstance() {
@@ -44,5 +46,9 @@ public class TailleComposants {
 
     public int getRad() {
         return rad;
+    }
+
+    public int getStrokeWidth() {
+        return this.strokeWidth;
     }
 }

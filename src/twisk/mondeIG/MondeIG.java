@@ -92,7 +92,7 @@ public class MondeIG implements Iterable<EtapeIG> {
                 //Si j'en trouve un, cela signifie que celui en paramètre est le second
                 if (pdcIG.isClicked()) {
                     pdcIG.setClicked();
-                    ArcIG arc = new ArcIG(pdcIG, pdc);
+                    ajouter(pdcIG, pdc);
                     isCreated = true;
                 }
                 //Si j'en trouve pas, le pdc en param est le premier.
@@ -100,6 +100,12 @@ public class MondeIG implements Iterable<EtapeIG> {
         }
         if (!isCreated) {
             pdc.setClicked();
+        }
+    }
+
+    public void randomPos() {
+        for (EtapeIG e : this) {
+            e.randomPositions();
         }
     }
 }

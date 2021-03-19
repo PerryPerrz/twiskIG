@@ -8,4 +8,12 @@ public class ArcIG {
         this.PdcDepart = PdcD;
         this.PdcArrive = PdcA;
     }
+
+    public PointDeControleIG getPdcDepart() {
+        return PdcDepart;
+    }
+
+    public PointDeControleIG getPdcArrive() {
+        return PdcArrive;
+    }
 }
