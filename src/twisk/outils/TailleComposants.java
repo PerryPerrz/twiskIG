@@ -8,7 +8,9 @@ public class TailleComposants {
     private final int windowX;
     private final int windowY;
     private final int rad;
-    private final int strokeWidth;
+    private final int largLigne;
+    private final int longTri;
+    private final int largTri;
 
     private TailleComposants() {
         this.larg = 80;
@@ -17,7 +19,9 @@ public class TailleComposants {
         this.windowX = 700;
         this.windowY = 600;
         this.rad = 6;
-        this.strokeWidth = 4;
+        this.largLigne = 2;
+        this.longTri = 18;
+        this.largTri = 6;
     }
 
     public static TailleComposants getInstance() {
@@ -48,7 +52,15 @@ public class TailleComposants {
         return rad;
     }
 
-    public int getStrokeWidth() {
-        return this.strokeWidth;
+    public int getLargLigne() {
+        return this.largLigne;
+    }
+
+    public int getLongTri() {
+        return longTri;
+    }
+
+    public int getLargTri() {
+        return largTri;
     }
 }

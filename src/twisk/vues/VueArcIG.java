@@ -4,12 +4,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
+import javafx.scene.transform.Rotate;
 import twisk.mondeIG.ArcIG;
 import twisk.mondeIG.MondeIG;
 import twisk.mondeIG.PointDeControleIG;
 import twisk.outils.TailleComposants;
-
-import java.awt.*;
 
 public class VueArcIG extends Pane implements Vue {
     private final MondeIG monde;
@@ -23,11 +22,11 @@ public class VueArcIG extends Pane implements Vue {
         this.ligne = new Line();
         this.triangle = new Polyline();
         TailleComposants tc = TailleComposants.getInstance();
-        ligne.setStroke(Color.PINK);
-        ligne.setStrokeWidth(tc.getStrokeWidth());
-        triangle.setStroke(Color.PINK);
-        triangle.setFill(Color.PINK);
-        triangle.setStrokeWidth(tc.getStrokeWidth());
+        ligne.setStroke(Color.BLUEVIOLET);
+        ligne.setStrokeWidth(tc.getLargLigne());
+        triangle.setStroke(Color.BLACK);
+        triangle.setFill(Color.BLUEVIOLET);
+        triangle.setStrokeWidth(tc.getLargLigne());
         this.getChildren().addAll(ligne, triangle);
     }
 
@@ -48,19 +47,45 @@ public class VueArcIG extends Pane implements Vue {
     //Fonction qui calcule l'orientation de la flèche
     public void apparitionDuTriangle() {
         TailleComposants tc = TailleComposants.getInstance();
-        int pointDepX = arc.getPdcDepart().getCentreX();
-        int pointDepY = arc.getPdcDepart().getCentreY();
-        int pointArrX = arc.getPdcArrive().getCentreX();
-        int pointArrY = arc.getPdcArrive().getCentreY();
+        double pointDepX = arc.getPdcDepart().getCentreX();
+        double pointDepY = arc.getPdcDepart().getCentreY();
+        double pointArrX = arc.getPdcArrive().getCentreX();
+        double pointArrY = arc.getPdcArrive().getCentreY();
 
-        Point ptA = new Point(pointArrX - pointDepX, pointArrY - pointDepY);
-        double rapport = 15.00 / Math.sqrt(Math.pow((pointArrX - pointDepX), 2) + Math.pow((pointArrY - pointDepY), 2));
-        Point ptB = new Point((int) (-ptA.getX() * rapport), (int) (-ptA.getY() * rapport));
-        Point ptC = new Point((int) (pointArrX + ptB.getX()), (int) (pointArrY + ptB.getY()));
-        Point ptD = new Point((int) (ptB.getX() / 2), (int) (ptB.getY() / 2));
-        Point ptE = new Point((int) (ptC.getX() - ptD.getY()), (int) (ptC.getY() + ptB.getX()));
-        Point ptF = new Point((int) (ptC.getX() + ptD.getY()), (int) (ptC.getY() - ptD.getX()));
+        //Création du triangle
+        triangle.getPoints().addAll(pointArrX, pointArrY, pointArrX + tc.getLongTri(), pointArrY + tc.getLargTri(), pointArrX + tc.getLongTri(), pointArrY - tc.getLargTri(), pointArrX, pointArrY);
 
-        this.triangle.getPoints().addAll((double) pointArrX, (double) pointArrY, ptE.getX(), ptE.getY(), ptF.getX(), ptF.getY(), (double) pointArrX, (double) pointArrY);
+        //L'angle de la flèche :
+
+        //On calcule delta venant de l'équation d'une droite formée par deux points (y = delta * x + b)
+        double del = (pointDepY - pointArrY) / (pointDepX - pointArrX);
+
+        //Calcul correspondant à la tangente de l'angle entre la droite horizontale et la droite correspondant au corps de la flèche.
+        double tangAngle = Math.abs(del);
+
+        double angleEnRadiant = Math.atan(tangAngle); //On sait que tan(Alpha) = |Delta| donc pour avoir Alpha, on fait arctan(|Delta|)
+        double angleEnDegree = Math.toDegrees(angleEnRadiant);
+
+        //On change l'angle en fonction de la position du point de départ (Si on est dans la partie haut à gauche,bas à gauche ou bas à droite du graphique)
+        //Si l'on est dans la partie en bas à droite du graphique (en math) donc en haut à droite dans un graph INFORMATIQUE :)
+        if (pointDepX >= pointArrX && pointDepY < pointArrY) {
+            angleEnDegree = -angleEnDegree;
+        }
+        //Si l'on est dans la partie en haut à gauche du graphique (en math) donc en bas à gauche dans un graph INFORMATIQUE :)
+        else if (pointDepX < pointArrX && pointDepY >= pointArrY) {
+            angleEnDegree = 180 - angleEnDegree;
+        }
+        //Si l'on est dans la partie en bas à gauche du graphiquee (en math) donc en haut à gauche dans un graph INFORMATIQUE :)
+        else if (pointDepX < pointArrX && pointDepY < pointArrY) {
+            angleEnDegree = -(180 - angleEnDegree);
+        }
+
+        //Maintenant, il faut s'occuper de la rotation de la tête de la flèche
+        Rotate rotate = new Rotate();
+        rotate.setAngle(angleEnDegree);
+        rotate.setPivotX(pointArrX);
+        rotate.setPivotY(pointArrY);
+
+        triangle.getTransforms().add(rotate);
     }
 }

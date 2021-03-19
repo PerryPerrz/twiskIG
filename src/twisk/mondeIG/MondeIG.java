@@ -80,7 +80,7 @@ public class MondeIG implements Iterable<EtapeIG> {
             ArcIG ark = new ArcIG(pdc1, pdc2);
             this.arcs.add(ark);
         } else {
-            System.out.print("Vous ne pouvez pas créer d'arcs entre 2 points de controle identiques!");
+            System.out.println("Vous ne pouvez pas créer d'arcs entre 2 points de controle identiques!");
         }
     }
 
@@ -98,18 +98,13 @@ public class MondeIG implements Iterable<EtapeIG> {
                     pdcIG.setClicked();
                     ajouter(pdcIG, pdc);
                     isCreated = true;
+                    this.prevenirVues();
                 }
                 //Si j'en trouve pas, le pdc en param est le premier.
             }
         }
         if (!isCreated) {
             pdc.setClicked();
-        }
-    }
-
-    public void randomPos() {
-        for (EtapeIG e : this) {
-            e.randomPositions();
         }
     }
 }

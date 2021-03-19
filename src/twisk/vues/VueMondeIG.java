@@ -35,8 +35,6 @@ public class VueMondeIG extends Pane implements Vue {
     public void mettreAJour() {
         this.getChildren().clear();
         TailleComposants tC = TailleComposants.getInstance();
-        //On met à jour le modèle avant de mettre à jour la vue.
-        monde.randomPos();
         //il demande un iterator sur les arcs au monde puis parours les arcs avec un for
         for (Iterator<ArcIG> it = monde.iteratorArcs(); it.hasNext(); ) {
             ArcIG a = it.next();
