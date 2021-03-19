@@ -4,6 +4,7 @@ public class PointDeControleIG {
     private int centreX;
     private int centreY;
     private final String id;
+
     private final EtapeIG etapeRattache;
     //Booléen qui informe sur quel Pdc l'utilisateur à cliqué
     private boolean clicked;
@@ -40,4 +41,9 @@ public class PointDeControleIG {
     public String getId() {
         return id;
     }
+
+    public EtapeIG getEtapeRattache() {
+        return etapeRattache;
+    }
+
 }

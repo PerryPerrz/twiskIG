@@ -62,7 +62,6 @@ public class MondeIG implements Iterable<EtapeIG> {
     }
 
     //Fonctions nécessaires aux tests de MondeIG (fonction "ajouter", "iterator")
-
     public int nbEtapes() {
         int cpt = 0;
         for (int i = 0; i < this.etapes.size(); ++i) {
@@ -76,11 +75,26 @@ public class MondeIG implements Iterable<EtapeIG> {
     }
 
     public void ajouter(PointDeControleIG pdc1, PointDeControleIG pdc2) {
-        if (!pdc1.getId().equals(pdc2.getId())) {
+        boolean alreadyAdd = false;
+        boolean pointDeDepartSurUnPointDArret = false;
+        for (Iterator<ArcIG> it = this.iteratorArcs(); it.hasNext(); ) {
+            ArcIG arc = it.next();
+            //Exactement le même arc où exactement l'opposé de cet arc
+            if ((arc.getPdcDepart().getId().equals(pdc1.getId()) && arc.getPdcArrive().getId().equals(pdc2.getId())) || (arc.getPdcDepart().getId().equals(pdc2.getId()) && arc.getPdcArrive().getId().equals(pdc1.getId()))) {
+                alreadyAdd = true;
+                System.out.println("On ne peut pas créer un arc déjà créer! où exactement l'inverse!");
+            }
+            if (arc.getPdcArrive().getId().equals(pdc1.getId())) {
+                pointDeDepartSurUnPointDArret = true;
+                System.out.println("Un arc ne peut pas partir du point d'arrivé d'un autre arc!");
+            }
+        }
+        System.out.println((pdc1.getEtapeRattache() == pdc2.getEtapeRattache()) + "" + alreadyAdd + "" + pointDeDepartSurUnPointDArret);
+        if (pdc1.getEtapeRattache() == pdc2.getEtapeRattache()) {
+            System.out.println("Vous ne pouvez pas, créer d'arcs entre 2 points de controle identiques! où créer un arc entre 2 points d'une même étape!");
+        } else if (!alreadyAdd && !pointDeDepartSurUnPointDArret) {
             ArcIG ark = new ArcIG(pdc1, pdc2);
             this.arcs.add(ark);
-        } else {
-            System.out.println("Vous ne pouvez pas créer d'arcs entre 2 points de controle identiques!");
         }
     }
 
