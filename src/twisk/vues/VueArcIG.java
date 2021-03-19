@@ -35,7 +35,7 @@ public class VueArcIG extends Pane implements Vue {
         this.getChildren().clear();
         this.apparitionDeLaLigne(this.arc.getPdcArrive(), this.arc.getPdcDepart());
         this.apparitionDuTriangle();
-        this.getChildren().addAll(ligne,triangle);
+        this.getChildren().addAll(ligne, triangle);
     }
 
     public void apparitionDeLaLigne(PointDeControleIG pdc1, PointDeControleIG pdc2) {
@@ -46,7 +46,7 @@ public class VueArcIG extends Pane implements Vue {
     }
 
     //Fonction qui calcule l'orientation de la flèche
-    public void apparitionDuTriangle(){
+    public void apparitionDuTriangle() {
         TailleComposants tc = TailleComposants.getInstance();
         int pointDepX = arc.getPdcDepart().getCentreX();
         int pointDepY = arc.getPdcDepart().getCentreY();
@@ -55,12 +55,12 @@ public class VueArcIG extends Pane implements Vue {
 
         Point ptA = new Point(pointArrX - pointDepX, pointArrY - pointDepY);
         double rapport = 15.00 / Math.sqrt(Math.pow((pointArrX - pointDepX), 2) + Math.pow((pointArrY - pointDepY), 2));
-        Point ptB = new Point((int)(- ptA.getX() * rapport), (int)(- ptA.getY() * rapport));
-        Point ptC = new Point((int)(pointArrX + ptB.getX()), (int)(pointArrY + ptB.getY()));
-        Point ptD = new Point((int)(ptB.getX()/2), (int)(ptB.getY()/2));
-        Point ptE = new Point((int)(ptC.getX() - ptD.getY()), (int)(ptC.getY() + ptB.getX()));
-        Point ptF = new Point((int)(ptC.getX() + ptD.getY()), (int)(ptC.getY() - ptD.getX()));
+        Point ptB = new Point((int) (-ptA.getX() * rapport), (int) (-ptA.getY() * rapport));
+        Point ptC = new Point((int) (pointArrX + ptB.getX()), (int) (pointArrY + ptB.getY()));
+        Point ptD = new Point((int) (ptB.getX() / 2), (int) (ptB.getY() / 2));
+        Point ptE = new Point((int) (ptC.getX() - ptD.getY()), (int) (ptC.getY() + ptB.getX()));
+        Point ptF = new Point((int) (ptC.getX() + ptD.getY()), (int) (ptC.getY() - ptD.getX()));
 
-        this.triangle.getPoints().addAll((double)pointArrX, (double)pointArrY, ptE.getX(), ptE.getY(), ptF.getX(), ptF.getY(),(double)pointArrX, (double)pointArrY);
+        this.triangle.getPoints().addAll((double) pointArrX, (double) pointArrY, ptE.getX(), ptE.getY(), ptF.getX(), ptF.getY(), (double) pointArrX, (double) pointArrY);
     }
 }
