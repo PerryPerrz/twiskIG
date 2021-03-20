@@ -2,6 +2,7 @@ package twisk.vues;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import twisk.exceptions.TwiskException;
 import twisk.mondeIG.MondeIG;
 import twisk.mondeIG.PointDeControleIG;
 import twisk.outils.TailleComposants;
@@ -16,7 +17,13 @@ public class VuePointDeControleIG extends Circle implements Vue {
         this.pdc = pdc;
         this.setFill(Color.SLATEBLUE);
         this.setRadius(tc.getRad());
-        this.setOnMouseClicked(ActionEvent -> monde.creationArc(pdc));
+        this.setOnMouseClicked(ActionEvent -> {
+            try {
+                monde.creationArc(pdc);
+            } catch (TwiskException e) {
+                System.out.println(e.getMessage());
+            }
+        });
         monde.ajouterVue(this);
     }
 

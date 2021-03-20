@@ -2,10 +2,13 @@ package twisk.tests;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import twisk.exceptions.ArcAlreadyCreate;
+import twisk.exceptions.CreateArcWithEndPdc;
+import twisk.exceptions.SameActivity;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MondeIGTest {
     MondeIG monde;
@@ -45,29 +48,32 @@ class MondeIGTest {
     @Test
     void testAjouter() {
         monde.ajouter("Activite");
-        //Même étape
-        monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("0").getPdcIndex(1));
+        //Même étape | assertThrows(Nom de la classe qui correspond à l'exception retournée, ()-> cette ligne de code provoque une exception)
+        assertThrows(SameActivity.class, () -> monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("0").getPdcIndex(1)));
         assertEquals(monde.getNbArcs(), 0);
         //Même étape même pdc
-        monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("0").getPdcIndex(0));
+        assertThrows(SameActivity.class, () -> monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("0").getPdcIndex(0)));
         assertEquals(monde.getNbArcs(), 0);
         //Même étape même pdc
-        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(0), monde.getEtapeIndice("1").getPdcIndex(0));
+        assertThrows(SameActivity.class, () -> monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(0), monde.getEtapeIndice("1").getPdcIndex(0)));
         assertEquals(monde.getNbArcs(), 0);
         //Même étape même pdc
-        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("1").getPdcIndex(1));
+        assertThrows(SameActivity.class, () -> monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("1").getPdcIndex(1)));
         assertEquals(monde.getNbArcs(), 0);
         //Etapes différentes, pdc différents
-        monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("1").getPdcIndex(1));
+        assertDoesNotThrow(() -> monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("1").getPdcIndex(1)));
         assertEquals(monde.getNbArcs(), 1);
         //Etapes différentes, pdc différents
-        monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(2), monde.getEtapeIndice("1").getPdcIndex(1));
+        assertDoesNotThrow(() -> monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(2), monde.getEtapeIndice("1").getPdcIndex(1)));
         assertEquals(monde.getNbArcs(), 2);
         //C'est exactement l'inverse de l'arc précedent
-        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("0").getPdcIndex(2));
+        assertThrows(CreateArcWithEndPdc.class, () -> monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("0").getPdcIndex(2)));
         assertEquals(monde.getNbArcs(), 2);
-        //Arc crée avec le point d'arrivée de l'avant dernier arc
-        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("0").getPdcIndex(3));
+        //Arc crée avec le point d'arrivée d'un arc déjà crée
+        assertThrows(CreateArcWithEndPdc.class, () -> monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("0").getPdcIndex(3)));
+        assertEquals(monde.getNbArcs(), 2);
+        //Test avec exactement le même arc
+        assertThrows(ArcAlreadyCreate.class, () -> monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(2), monde.getEtapeIndice("1").getPdcIndex(1)));
         assertEquals(monde.getNbArcs(), 2);
     }
 }
