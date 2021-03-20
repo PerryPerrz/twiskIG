@@ -1,8 +1,8 @@
 package twisk.mondeIG;
 
-import twisk.exceptions.ArcAlreadyCreate;
-import twisk.exceptions.CreateArcWithEndPdc;
-import twisk.exceptions.SameActivity;
+import twisk.exceptions.ArcAlreadyCreateException;
+import twisk.exceptions.CreateArcWithEndPdcException;
+import twisk.exceptions.SameActivityException;
 import twisk.exceptions.TwiskException;
 import twisk.outils.FabriqueIdentifiant;
 import twisk.vues.Vue;
@@ -86,15 +86,15 @@ public class MondeIG implements Iterable<EtapeIG> {
             //Exactement le même arc où exactement l'opposé de cet arc
             if ((arc.getPdcDepart().getId().equals(pdc1.getId()) && arc.getPdcArrive().getId().equals(pdc2.getId()))) {
                 alreadyAdd = true;
-                throw new ArcAlreadyCreate("On ne peut pas créer un arc déjà créer!");
+                throw new ArcAlreadyCreateException("On ne peut pas créer un arc déjà créer!");
             }
             if (arc.getPdcArrive().getId().equals(pdc1.getId()) || arc.getPdcDepart().getId().equals(pdc2.getId())) {
                 pointDeDepartSurUnPointDArret = true;
-                throw new CreateArcWithEndPdc("Un arc ne peut pas partir du point d'arrivé d'un autre arc!");
+                throw new CreateArcWithEndPdcException("Un arc ne peut pas partir du point d'arrivé d'un autre arc!");
             }
         }
         if (pdc1.getEtapeRattache() == pdc2.getEtapeRattache()) {
-            throw new SameActivity("Vous ne pouvez pas, créer d'arcs entre 2 points de controle identiques! où créer un arc entre 2 points d'une même étape!");
+            throw new SameActivityException("Vous ne pouvez pas, créer d'arcs entre 2 points de controle identiques! où créer un arc entre 2 points d'une même étape!");
         }
         ArcIG ark = new ArcIG(pdc1, pdc2);
         this.arcs.add(ark);

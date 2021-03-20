@@ -11,6 +11,7 @@ public class TailleComposants {
     private final int largLigne;
     private final int longTri;
     private final int largTri;
+    private final int tailleIcons;
 
     private TailleComposants() {
         this.larg = 80;
@@ -22,6 +23,7 @@ public class TailleComposants {
         this.largLigne = 2;
         this.longTri = 18;
         this.largTri = 6;
+        this.tailleIcons = 50;
     }
 
     public static TailleComposants getInstance() {
@@ -62,5 +64,9 @@ public class TailleComposants {
 
     public int getLargTri() {
         return largTri;
+    }
+
+    public int getTailleIcons() {
+        return tailleIcons;
     }
 }
