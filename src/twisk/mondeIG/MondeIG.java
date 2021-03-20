@@ -82,14 +82,13 @@ public class MondeIG implements Iterable<EtapeIG> {
             //Exactement le même arc où exactement l'opposé de cet arc
             if ((arc.getPdcDepart().getId().equals(pdc1.getId()) && arc.getPdcArrive().getId().equals(pdc2.getId())) || (arc.getPdcDepart().getId().equals(pdc2.getId()) && arc.getPdcArrive().getId().equals(pdc1.getId()))) {
                 alreadyAdd = true;
-                System.out.println("On ne peut pas créer un arc déjà créer! où exactement l'inverse!");
+                System.out.println("On ne peut pas créer un arc déjà créer!");
             }
             if (arc.getPdcArrive().getId().equals(pdc1.getId())) {
                 pointDeDepartSurUnPointDArret = true;
                 System.out.println("Un arc ne peut pas partir du point d'arrivé d'un autre arc!");
             }
         }
-        System.out.println((pdc1.getEtapeRattache() == pdc2.getEtapeRattache()) + "" + alreadyAdd + "" + pointDeDepartSurUnPointDArret);
         if (pdc1.getEtapeRattache() == pdc2.getEtapeRattache()) {
             System.out.println("Vous ne pouvez pas, créer d'arcs entre 2 points de controle identiques! où créer un arc entre 2 points d'une même étape!");
         } else if (!alreadyAdd && !pointDeDepartSurUnPointDArret) {

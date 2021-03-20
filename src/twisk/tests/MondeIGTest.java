@@ -66,8 +66,8 @@ class MondeIGTest {
         //C'est exactement l'inverse de l'arc précedent
         monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("0").getPdcIndex(2));
         assertEquals(monde.getNbArcs(), 2);
-        //Etapes différentes, pdc différents
-        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(2), monde.getEtapeIndice("0").getPdcIndex(3));
-        assertEquals(monde.getNbArcs(), 3);
+        //Arc crée avec le point d'arrivée de l'avant dernier arc
+        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("0").getPdcIndex(3));
+        assertEquals(monde.getNbArcs(), 2);
     }
 }
