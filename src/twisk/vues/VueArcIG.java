@@ -5,12 +5,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polyline;
 import javafx.scene.transform.Rotate;
+import twisk.designPattern.Observateur;
 import twisk.mondeIG.ArcIG;
 import twisk.mondeIG.MondeIG;
 import twisk.mondeIG.PointDeControleIG;
 import twisk.outils.TailleComposants;
 
-public class VueArcIG extends Pane implements Vue {
+public class VueArcIG extends Pane implements Observateur {
     private final MondeIG monde;
     private final ArcIG arc;
     private final Line ligne;
@@ -18,6 +19,7 @@ public class VueArcIG extends Pane implements Vue {
 
     public VueArcIG(MondeIG monde, ArcIG arc) {
         this.monde = monde;
+        monde.ajouterObservateur(this);
         this.arc = arc;
         this.ligne = new Line();
         this.triangle = new Polyline();
@@ -30,7 +32,7 @@ public class VueArcIG extends Pane implements Vue {
         this.getChildren().addAll(ligne, triangle);
     }
 
-    public void mettreAJour() {
+    public void reagir() {
         this.getChildren().clear();
         this.apparitionDeLaLigne(this.arc.getPdcArrive(), this.arc.getPdcDepart());
         this.apparitionDuTriangle();

@@ -5,17 +5,18 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import twisk.designPattern.Observateur;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.TailleComposants;
 
 
-public class VueOutils extends TilePane implements Vue {
+public class VueOutils extends TilePane implements Observateur {
     private final MondeIG monde;
     private final Button bouton;
 
     public VueOutils(MondeIG monde) {
         this.monde = monde;
-        monde.ajouterVue(this);
+        monde.ajouterObservateur(this);
         bouton = new Button();
         bouton.setOnAction(actionEvent -> monde.ajouter("Activite"));
         Tooltip tool = new Tooltip();
@@ -29,7 +30,7 @@ public class VueOutils extends TilePane implements Vue {
     }
 
     @Override
-    public void mettreAJour() {
+    public void reagir() {
 
     }
 }

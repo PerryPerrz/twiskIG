@@ -2,10 +2,11 @@ package twisk.vues;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import twisk.designPattern.Observateur;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
-public class VueActiviteIG extends VueEtapeIG implements Vue {
+public class VueActiviteIG extends VueEtapeIG implements Observateur {
     private final HBox box;
 
     public VueActiviteIG(MondeIG monde, EtapeIG etape) {
@@ -17,7 +18,7 @@ public class VueActiviteIG extends VueEtapeIG implements Vue {
     }
 
     @Override
-    public void mettreAJour() {
+    public void reagir() {
         this.relocate(etape.getPosX(), etape.getPosY());
     }
 }

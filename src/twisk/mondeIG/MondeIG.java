@@ -1,25 +1,24 @@
 package twisk.mondeIG;
 
+import twisk.designPattern.SujetObserve;
 import twisk.exceptions.ArcAlreadyCreateException;
 import twisk.exceptions.CreateArcWithEndPdcException;
 import twisk.exceptions.SameActivityException;
 import twisk.exceptions.TwiskException;
 import twisk.outils.FabriqueIdentifiant;
-import twisk.vues.Vue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class MondeIG implements Iterable<EtapeIG> {
+public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     private final HashMap<String, EtapeIG> etapes;
-    private final ArrayList<Vue> vues;
     private final ArrayList<ArcIG> arcs;
 
     public MondeIG() {
+        super();
         FabriqueIdentifiant fabID = FabriqueIdentifiant.getInstance();
         etapes = new HashMap<>(10);
-        vues = new ArrayList<>(10);
         arcs = new ArrayList<>(10);
         String id = fabID.getIdentifiantEtape();
         ActiviteIG activite = new ActiviteIG("Activité n°" + id, id);
@@ -33,7 +32,7 @@ public class MondeIG implements Iterable<EtapeIG> {
                 String id = fabID.getIdentifiantEtape();
                 ActiviteIG activite = new ActiviteIG("Activité n°" + id, id);
                 this.etapes.put(id, activite);
-                this.prevenirVues();
+                this.notifierObservateurs();
         }
     }
 
@@ -55,16 +54,6 @@ public class MondeIG implements Iterable<EtapeIG> {
         };
     }
 
-    public void ajouterVue(Vue v) {
-        vues.add(v);
-    }
-
-    public void prevenirVues() {
-        for (int i = 0; i < this.vues.size(); ++i) {
-            vues.get(i).mettreAJour();
-        }
-    }
-
     //Fonctions nécessaires aux tests de MondeIG (fonction "ajouter", "iterator")
     public int nbEtapes() {
         int cpt = 0;
@@ -74,22 +63,14 @@ public class MondeIG implements Iterable<EtapeIG> {
         return cpt;
     }
 
-    public String getIdentifiantEtape(String id) {
-        return this.getEtapeIndice(id).getIdentifiant();
-    }
-
     public void ajouter(PointDeControleIG pdc1, PointDeControleIG pdc2) throws TwiskException {
-        boolean alreadyAdd = false;
-        boolean pointDeDepartSurUnPointDArret = false;
         for (Iterator<ArcIG> it = this.iteratorArcs(); it.hasNext(); ) {
             ArcIG arc = it.next();
             //Exactement le même arc où exactement l'opposé de cet arc
             if ((arc.getPdcDepart().getId().equals(pdc1.getId()) && arc.getPdcArrive().getId().equals(pdc2.getId()))) {
-                alreadyAdd = true;
                 throw new ArcAlreadyCreateException("On ne peut pas créer un arc déjà créer!");
             }
             if (arc.getPdcArrive().getId().equals(pdc1.getId()) || arc.getPdcDepart().getId().equals(pdc2.getId())) {
-                pointDeDepartSurUnPointDArret = true;
                 throw new CreateArcWithEndPdcException("Un arc ne peut pas partir du point d'arrivé d'un autre arc!");
             }
         }
@@ -114,7 +95,7 @@ public class MondeIG implements Iterable<EtapeIG> {
                     pdcIG.setClicked();
                     isCreated = true;
                     ajouter(pdcIG, pdc);
-                    this.prevenirVues();
+                    this.notifierObservateurs();
                 }
                 //Si j'en trouve pas, le pdc en param est le premier.
             }

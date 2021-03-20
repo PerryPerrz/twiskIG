@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import twisk.designPattern.Observateur;
 import twisk.exceptions.ArcAlreadyCreateException;
 import twisk.exceptions.CreateArcWithEndPdcException;
 import twisk.exceptions.SameActivityException;
@@ -15,13 +16,14 @@ import twisk.mondeIG.MondeIG;
 import twisk.mondeIG.PointDeControleIG;
 import twisk.outils.TailleComposants;
 
-public class VuePointDeControleIG extends Circle implements Vue {
+public class VuePointDeControleIG extends Circle implements Observateur {
     private final MondeIG monde;
     private final PointDeControleIG pdc;
 
     public VuePointDeControleIG(MondeIG monde, PointDeControleIG pdc) {
         TailleComposants tc = TailleComposants.getInstance();
         this.monde = monde;
+        monde.ajouterObservateur(this);
         this.pdc = pdc;
         this.setFill(Color.SLATEBLUE);
         this.setRadius(tc.getRad());
@@ -72,11 +74,11 @@ public class VuePointDeControleIG extends Circle implements Vue {
                 e.printStackTrace();
             }
         });
-        monde.ajouterVue(this);
+        monde.ajouterObservateur(this);
     }
 
     @Override
-    public void mettreAJour() {
+    public void reagir() {
         //On change les coordonnées du cercle à la nouvelle place du pdc
         this.setCenterX(this.pdc.getCentreX());
         this.setCenterY(this.pdc.getCentreY());
