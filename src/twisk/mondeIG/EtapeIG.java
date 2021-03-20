@@ -66,4 +66,8 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
             }
         };
     }
+
+    public PointDeControleIG getPdcIndex(int indice) {
+        return this.pdc[indice];
+    }
 }

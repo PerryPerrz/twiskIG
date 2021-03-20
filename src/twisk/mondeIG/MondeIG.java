@@ -71,7 +71,7 @@ public class MondeIG implements Iterable<EtapeIG> {
     }
 
     public String getIdentifiantEtape(String id) {
-        return this.etapes.get(id).getIdentifiant();
+        return this.getEtapeIndice(id).getIdentifiant();
     }
 
     public void ajouter(PointDeControleIG pdc1, PointDeControleIG pdc2) {
@@ -120,5 +120,14 @@ public class MondeIG implements Iterable<EtapeIG> {
         if (!isCreated) {
             pdc.setClicked();
         }
+    }
+
+    //Fonctions nécessaires aux tests
+    public EtapeIG getEtapeIndice(String indice) {
+        return this.etapes.get(indice);
+    }
+
+    public int getNbArcs() {
+        return this.arcs.size();
     }
 }

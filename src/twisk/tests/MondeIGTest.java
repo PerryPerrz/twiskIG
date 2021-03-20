@@ -41,4 +41,33 @@ class MondeIGTest {
     @Test
     void prevenirVues() {
     }
+
+    @Test
+    void testAjouter() {
+        monde.ajouter("Activite");
+        //Même étape
+        monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("0").getPdcIndex(1));
+        assertEquals(monde.getNbArcs(), 0);
+        //Même étape même pdc
+        monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("0").getPdcIndex(0));
+        assertEquals(monde.getNbArcs(), 0);
+        //Même étape même pdc
+        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(0), monde.getEtapeIndice("1").getPdcIndex(0));
+        assertEquals(monde.getNbArcs(), 0);
+        //Même étape même pdc
+        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("1").getPdcIndex(1));
+        assertEquals(monde.getNbArcs(), 0);
+        //Etapes différentes, pdc différents
+        monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(0), monde.getEtapeIndice("1").getPdcIndex(1));
+        assertEquals(monde.getNbArcs(), 1);
+        //Etapes différentes, pdc différents
+        monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(2), monde.getEtapeIndice("1").getPdcIndex(1));
+        assertEquals(monde.getNbArcs(), 2);
+        //C'est exactement l'inverse de l'arc précedent
+        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(1), monde.getEtapeIndice("0").getPdcIndex(2));
+        assertEquals(monde.getNbArcs(), 2);
+        //Etapes différentes, pdc différents
+        monde.ajouter(monde.getEtapeIndice("1").getPdcIndex(2), monde.getEtapeIndice("0").getPdcIndex(3));
+        assertEquals(monde.getNbArcs(), 3);
+    }
 }
