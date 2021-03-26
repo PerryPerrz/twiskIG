@@ -7,14 +7,17 @@ import twisk.exceptions.CreateArcWithEndPdcException;
 import twisk.exceptions.SameActivityException;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
+import twisk.outils.FabriqueIdentifiant;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MondeIGTest {
     MondeIG monde;
+    FabriqueIdentifiant fab = FabriqueIdentifiant.getInstance();
 
     @BeforeEach
     void setUp() {
+        fab.reset();
         monde = new MondeIG();
     }
 
@@ -31,10 +34,38 @@ class MondeIGTest {
     void iterator() {
         int cpt = 0;
         monde.ajouter("Activite");
-        for (EtapeIG etapeIG : monde) {
-            assertEquals(etapeIG.getIdentifiant(), "" + cpt);
+        for (EtapeIG e : monde) {
+            assertEquals(e.getIdentifiant(), "" + cpt); //Bonnes étapes
             cpt++;
         }
+        assertEquals(cpt, 2); //Bons nombres de boucles
+        monde.ajouter("Activite");
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("1"));
+        monde.supprimer(monde.getEtapeIndice("1"));
+        cpt = 0;
+        for (EtapeIG e : monde) {
+            assertEquals(e.getIdentifiant(), "" + cpt);
+            cpt += 2;
+        }
+        assertEquals(cpt, 4);
+        monde.ajouter("Activite");
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("3"));
+        monde.supprimer(monde.getEtapeIndice("3"));
+        cpt = 0;
+        for (EtapeIG e : monde) {
+            assertEquals(e.getIdentifiant(), "" + cpt);
+            cpt += 2;
+        }
+        assertEquals(cpt, 4);
+        monde.ajouter("Activite");
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("2"));
+        monde.supprimer(monde.getEtapeIndice("2"));
+        cpt = 0;
+        for (EtapeIG e : monde) {
+            assertEquals(e.getIdentifiant(), "" + cpt);
+            cpt += 4;
+        }
+        assertEquals(cpt, 8);
     }
 
     @Test
@@ -75,5 +106,31 @@ class MondeIGTest {
         //Test avec exactement le même arc
         assertThrows(ArcAlreadyCreateException.class, () -> monde.ajouter(monde.getEtapeIndice("0").getPdcIndex(2), monde.getEtapeIndice("1").getPdcIndex(1)));
         assertEquals(monde.getNbArcs(), 2);
+    }
+
+    @Test
+    void supprimer() {
+        monde.ajouter("Activite");
+        monde.ajouter("Activite");
+        //On sélectionne les étapes pour pouvoir les supprimer
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("0"));
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("1"));
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("2"));
+
+        assertEquals(monde.nbEtapes(), 3);
+        monde.supprimer(monde.getEtapeIndice("1"));
+        assertEquals(monde.nbEtapes(), 2);
+        assertThrows(NullPointerException.class, () -> monde.getEtapeIndice("1").getIdentifiant());
+        assertEquals(monde.getEtapeIndice("0").getIdentifiant(), "0");  //On vérifie que l'étape 0 existe toujours
+        assertEquals(monde.getEtapeIndice("2").getIdentifiant(), "2");  //On vérifie que l'étape 2 existe toujours
+
+        monde.supprimer(monde.getEtapeIndice("0"));
+        assertEquals(monde.nbEtapes(), 1);
+        assertThrows(NullPointerException.class, () -> monde.getEtapeIndice("0").getIdentifiant());
+        assertEquals(monde.getEtapeIndice("2").getIdentifiant(), "2");  //On vérifie que l'étape 2 existe toujours
+
+        monde.supprimer(monde.getEtapeIndice("2"));
+        assertEquals(monde.nbEtapes(), 0);
+        assertThrows(NullPointerException.class, () -> monde.getEtapeIndice("2").getIdentifiant());
     }
 }

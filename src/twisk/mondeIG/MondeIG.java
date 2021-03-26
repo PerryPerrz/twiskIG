@@ -41,16 +41,26 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     @Override
     public Iterator<EtapeIG> iterator() {
         return new Iterator<>() {
-            int index = 0;
+            private int index = 0;
+            private int nbEtapesDejaParcourues = 0;
 
             @Override
             public boolean hasNext() {
-                return index < etapes.size() && etapes.get("" + index) != null; //On regarde si on est arrivé à la fin et si ce n'est pas le cas, si l'étape actuelle n'est pas null
+                //Tant qu'on à pas parcouru toutes les étapes
+                while (nbEtapesDejaParcourues != etapes.size()) {
+                    if (etapes.get("" + index) == null) { //On regarde si l'étape existe ou pas
+                        index++; //On passe à la prochaine étape
+                    } else {
+                        return true;
+                    }
+                }
+                return false;
             }
 
             @Override
             public EtapeIG next() {
                 index++;
+                nbEtapesDejaParcourues++;
                 return etapes.get("" + (index - 1));
             }
         };
@@ -131,10 +141,15 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
 
     public void supprimerLaSelection() {
         for (EtapeIG e : this) {
-            if (isSelectionned(e)) {
-                etapes.remove(e);
-            }
+            supprimer(e);
         }
         this.notifierObservateurs();
+    }
+
+    public void supprimer(EtapeIG e) {
+        if (isSelectionned(e)) {
+            etapesSelectionnees.remove(e);
+            etapes.remove(e.getIdentifiant());
+        }
     }
 }

@@ -21,4 +21,8 @@ public class FabriqueIdentifiant {
     public String getIdentifiantPdc() {
         return "" + this.noPdc++;
     }
+
+    public void reset() {
+        this.noEtape = 0;
+    }
 }
