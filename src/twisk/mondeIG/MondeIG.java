@@ -128,4 +128,13 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     public boolean isSelectionned(EtapeIG etape) {
         return etapesSelectionnees.contains(etape);
     }
+
+    public void supprimerLaSelection() {
+        for (EtapeIG e : this) {
+            if (isSelectionned(e)) {
+                etapes.remove(e);
+            }
+        }
+        this.notifierObservateurs();
+    }
 }

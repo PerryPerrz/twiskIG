@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.TailleComposants;
+import twisk.vues.VueMenu;
 import twisk.vues.VueMondeIG;
 import twisk.vues.VueOutils;
 
@@ -21,6 +22,7 @@ public class MainTwisk extends Application {
         BorderPane root = new BorderPane();
         VueOutils viewO = new VueOutils(monde);
         VueMondeIG viewM = new VueMondeIG(monde);
+        VueMenu viewMe = new VueMenu(monde);
         TailleComposants tc = TailleComposants.getInstance();
 
         /*
@@ -30,6 +32,7 @@ public class MainTwisk extends Application {
 
         root.setBottom(viewO);
         root.setCenter(viewM);
+        root.setRight(viewMe);
         primaryStage.setTitle("twiskIG | Hugo Ipt");
         primaryStage.setScene(new Scene(root, tc.getWindowX(), tc.getWindowY()));
         primaryStage.show();
