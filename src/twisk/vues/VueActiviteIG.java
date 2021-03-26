@@ -15,10 +15,14 @@ public class VueActiviteIG extends VueEtapeIG implements Observateur {
         box.setStyle("-fx-border-color: #8F00FF; -fx-background-insets: 0 0 -1 0, 0, 1, 2; -fx-background-radius: 3px, 3px, 2px, 1px; -fx-border-width: 3px; -fx-background-color: #00D1FF ;fx-font-size: 12px;-fx-font-family: system-ui;-fx-text-fill: #FF008B;");
         box.getChildren().add(new Label("Sauce BBQ"));
         this.getChildren().add(box);
+        this.setOnMouseClicked(actionEvent -> monde.ajouterEtapeSelectionnee(this.etape));
     }
 
     @Override
     public void reagir() {
         this.relocate(etape.getPosX(), etape.getPosY());
+        if (monde.isSelectionned(etape)) {
+            this.setStyle("-fx-background-color: #33FFB8");
+        }
     }
 }

@@ -13,12 +13,14 @@ import java.util.Iterator;
 
 public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     private final HashMap<String, EtapeIG> etapes;
+    private final ArrayList<EtapeIG> etapesSelectionnees;
     private final ArrayList<ArcIG> arcs;
 
     public MondeIG() {
         super();
         FabriqueIdentifiant fabID = FabriqueIdentifiant.getInstance();
         etapes = new HashMap<>(10);
+        etapesSelectionnees = new ArrayList<>(10);
         arcs = new ArrayList<>(10);
         String id = fabID.getIdentifiantEtape();
         ActiviteIG activite = new ActiviteIG("Activité n°" + id, id);
@@ -112,5 +114,18 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
 
     public int getNbArcs() {
         return this.arcs.size();
+    }
+
+    public void ajouterEtapeSelectionnee(EtapeIG etape) {
+        if (isSelectionned(etape)) {
+            etapesSelectionnees.remove(etape);
+        } else {
+            etapesSelectionnees.add(etape);
+        }
+        this.notifierObservateurs();
+    }
+
+    public boolean isSelectionned(EtapeIG etape) {
+        return etapesSelectionnees.contains(etape);
     }
 }
