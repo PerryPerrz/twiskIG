@@ -17,7 +17,8 @@ public class VueMondeIG extends Pane implements Observateur {
         this.monde = monde;
         monde.ajouterObservateur(this);
         TailleComposants tC = TailleComposants.getInstance();
-        for (EtapeIG etape : this.monde) {
+        for (Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();) {
+            EtapeIG etape = iter.next();
             //On met à jour le modèle avant de mettre à jour la vue.
             etape.randomPositions();
             VueActiviteIG viewA = new VueActiviteIG(this.monde, etape);
@@ -42,7 +43,8 @@ public class VueMondeIG extends Pane implements Observateur {
             VueArcIG viewArk = new VueArcIG(monde, a);
             this.getChildren().add(viewArk);
         }
-        for (EtapeIG etape : this.monde) {
+        for (Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();) {
+            EtapeIG etape = iter.next();
             VueActiviteIG viewA = new VueActiviteIG(this.monde, etape);
             viewA.setMinSize(tC.getLarg(), tC.getHaut());
             this.getChildren().add(viewA);

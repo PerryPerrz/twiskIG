@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
+public class MondeIG extends SujetObserve {
     private final HashMap<String, EtapeIG> etapes;
     private final ArrayList<EtapeIG> etapesSelectionnees;
     private final ArrayList<ArcIG> arcs;
@@ -40,32 +40,8 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         }
     }
 
-    @Override
     public Iterator<EtapeIG> iterator() {
-        return new Iterator<>() {
-            private int index = 0;
-            private int nbEtapesDejaParcourues = 0;
-
-            @Override
-            public boolean hasNext() {
-                //Tant qu'on à pas parcouru toutes les étapes
-                while (nbEtapesDejaParcourues != etapes.size()) {
-                    if (etapes.get("" + index) == null) { //On regarde si l'étape existe ou pas
-                        index++; //On passe à la prochaine étape
-                    } else {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            @Override
-            public EtapeIG next() {
-                index++;
-                nbEtapesDejaParcourues++;
-                return etapes.get("" + (index - 1));
-            }
-        };
+        return etapes.values().iterator(); //On itère sur les valeurs de la HashMap.
     }
 
     //Fonctions nécessaires aux tests de MondeIG (fonction "ajouter", "iterator")
@@ -101,7 +77,8 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
 
     public void creationArc(PointDeControleIG pdc) throws TwiskException {
         boolean isCreated = false;
-        for (EtapeIG etape : this) {
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext();) {
+            EtapeIG etape = iter.next();
             for (PointDeControleIG pdcIG : etape) {
                 //Je cherche dans tous les pdc si il y en a un qui est true, le pdc en paramètre est le 2éme pdc qu'on à cliqué
                 //Si j'en trouve un, cela signifie que celui en paramètre est le second
@@ -142,14 +119,15 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     }
 
     public void supprimerLaSelection() {
-        for (EtapeIG e : this) {
-            supprimer(e);
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext();) {
+            supprimer(iter);
         }
         this.notifierObservateurs();
     }
 
-    public void supprimer(EtapeIG e) {
+    public void supprimer(Iterator<EtapeIG> iterE) {
         ArcIG arc;
+        EtapeIG e = iterE.next();
         if (isSelectionned(e)) {
             for(Iterator<ArcIG> iter = this.iteratorArcs(); iter.hasNext();){
                 arc = iter.next();
@@ -158,13 +136,15 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
                     arcs.remove(arc);
                 }
             }
+            iterE.remove();
             etapesSelectionnees.remove(e);
             etapes.remove(e.getIdentifiant());
         }
     }
 
     public void renommerLaSelection(String newName){
-        for(EtapeIG e : this){
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext();) {
+            EtapeIG e = iter.next();
             if(this.isSelectionned(e)){
                 e.setNom(newName);
             }

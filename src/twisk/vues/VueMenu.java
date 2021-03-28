@@ -64,10 +64,14 @@ public class VueMenu extends MenuBar implements Observateur {
 
     public void rename(){
         TextInputDialog dialog = new TextInputDialog("Balançoire");
-        System.out.println("B");
         dialog.setTitle("Renommer la sélection");
         dialog.setHeaderText("Entrez votre nouveau nom :");
-        dialog.setContentText("Name :");
+        dialog.setContentText("Nom :");
+
+        TailleComposants tc = TailleComposants.getInstance();
+        Image image = new Image(getClass().getResourceAsStream("/twisk/ressources/images/tools.png"), tc.getTailleIcons(), tc.getTailleIcons(), true, true);
+        ImageView icon = new ImageView(image);
+        dialog.setGraphic(icon);
 
         Optional<String> result = dialog.showAndWait();
 

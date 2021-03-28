@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Test;
 import twisk.exceptions.ArcAlreadyCreateException;
 import twisk.exceptions.CreateArcWithEndPdcException;
 import twisk.exceptions.SameActivityException;
+import twisk.mondeIG.ArcIG;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.FabriqueIdentifiant;
+
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,34 +37,38 @@ class MondeIGTest {
     void iterator() {
         int cpt = 0;
         monde.ajouter("Activite");
-        for (EtapeIG e : monde) {
+        for(Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();){
+            EtapeIG e = iter.next();
             assertEquals(e.getIdentifiant(), "" + cpt); //Bonnes étapes
             cpt++;
         }
         assertEquals(cpt, 2); //Bons nombres de boucles
         monde.ajouter("Activite");
         monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("1"));
-        monde.supprimer(monde.getEtapeIndice("1"));
+        monde.supprimerLaSelection();
         cpt = 0;
-        for (EtapeIG e : monde) {
+        for(Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();){
+            EtapeIG e = iter.next();
             assertEquals(e.getIdentifiant(), "" + cpt);
             cpt += 2;
         }
         assertEquals(cpt, 4);
         monde.ajouter("Activite");
         monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("3"));
-        monde.supprimer(monde.getEtapeIndice("3"));
+        monde.supprimerLaSelection();
         cpt = 0;
-        for (EtapeIG e : monde) {
+        for(Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();){
+            EtapeIG e = iter.next();
             assertEquals(e.getIdentifiant(), "" + cpt);
             cpt += 2;
         }
         assertEquals(cpt, 4);
         monde.ajouter("Activite");
         monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("2"));
-        monde.supprimer(monde.getEtapeIndice("2"));
+        monde.supprimerLaSelection();
         cpt = 0;
-        for (EtapeIG e : monde) {
+        for(Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();){
+            EtapeIG e = iter.next();
             assertEquals(e.getIdentifiant(), "" + cpt);
             cpt += 4;
         }
@@ -112,24 +119,26 @@ class MondeIGTest {
     void supprimer() {
         monde.ajouter("Activite");
         monde.ajouter("Activite");
-        //On sélectionne les étapes pour pouvoir les supprimer
-        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("0"));
-        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("1"));
-        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("2"));
 
         assertEquals(monde.nbEtapes(), 3);
-        monde.supprimer(monde.getEtapeIndice("1"));
+        //On sélectionne l'étape 1 pour pouvoir la selectionner
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("1"));
+        monde.supprimerLaSelection();
         assertEquals(monde.nbEtapes(), 2);
         assertThrows(NullPointerException.class, () -> monde.getEtapeIndice("1").getIdentifiant());
         assertEquals(monde.getEtapeIndice("0").getIdentifiant(), "0");  //On vérifie que l'étape 0 existe toujours
         assertEquals(monde.getEtapeIndice("2").getIdentifiant(), "2");  //On vérifie que l'étape 2 existe toujours
 
-        monde.supprimer(monde.getEtapeIndice("0"));
+        //On sélectionne l'étape 0 pour pouvoir la selectionner
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("0"));
+        monde.supprimerLaSelection();
         assertEquals(monde.nbEtapes(), 1);
         assertThrows(NullPointerException.class, () -> monde.getEtapeIndice("0").getIdentifiant());
         assertEquals(monde.getEtapeIndice("2").getIdentifiant(), "2");  //On vérifie que l'étape 2 existe toujours
 
-        monde.supprimer(monde.getEtapeIndice("2"));
+        //On sélectionne l'étape 2 pour pouvoir la selectionner
+        monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("2"));
+        monde.supprimerLaSelection();
         assertEquals(monde.nbEtapes(), 0);
         assertThrows(NullPointerException.class, () -> monde.getEtapeIndice("2").getIdentifiant());
     }
