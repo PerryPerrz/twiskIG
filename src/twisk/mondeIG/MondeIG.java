@@ -1,5 +1,6 @@
 package twisk.mondeIG;
 
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.shape.Arc;
 import twisk.designPattern.SujetObserve;
 import twisk.exceptions.ArcAlreadyCreateException;
@@ -160,5 +161,14 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
             etapesSelectionnees.remove(e);
             etapes.remove(e.getIdentifiant());
         }
+    }
+
+    public void renommerLaSelection(String newName){
+        for(EtapeIG e : this){
+            if(this.isSelectionned(e)){
+                e.setNom(newName);
+            }
+        }
+        notifierObservateurs();
     }
 }

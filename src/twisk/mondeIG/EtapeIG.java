@@ -70,4 +70,12 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     public PointDeControleIG getPdcIndex(int indice) {
         return this.pdc[indice];
     }
+
+    public String getNom() {
+        return this.nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }
