@@ -16,4 +16,14 @@ public class ArcIG {
     public PointDeControleIG getPdcArrive() {
         return PdcArrive;
     }
+
+    //Fonction qui retourne vrai si des arcs relies cette étape
+    public boolean isLinkedToStage(EtapeIG e){
+        for(PointDeControleIG pdc : e){
+            if(pdc.getId().equals(this.getPdcArrive().getId()) || pdc.getId().equals(this.getPdcDepart().getId())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -1,5 +1,6 @@
 package twisk.mondeIG;
 
+import javafx.scene.shape.Arc;
 import twisk.designPattern.SujetObserve;
 import twisk.exceptions.ArcAlreadyCreateException;
 import twisk.exceptions.CreateArcWithEndPdcException;
@@ -147,7 +148,15 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     }
 
     public void supprimer(EtapeIG e) {
+        ArcIG arc;
         if (isSelectionned(e)) {
+            for(Iterator<ArcIG> iter = this.iteratorArcs(); iter.hasNext();){
+                arc = iter.next();
+                if(arc.isLinkedToStage(e)){
+                    iter.remove();
+                    arcs.remove(arc);
+                }
+            }
             etapesSelectionnees.remove(e);
             etapes.remove(e.getIdentifiant());
         }
