@@ -55,14 +55,17 @@ public class VueMenu extends MenuBar implements Observateur {
         ImageView icon5 = new ImageView(image5);
         renommer.setGraphic(icon5);
 
+        renommer.setDisable(true);
+
         this.getMenus().addAll(fichier, edition);
     }
 
     @Override
     public void reagir() {
+        edition.getItems().get(1).setDisable(monde.nbEtapesSelectionnees() != 1); //On set le disable à false lorsque le nombre d'étapes est égale à 1
     }
 
-    public void rename(){
+    public void rename() {
         TextInputDialog dialog = new TextInputDialog("Balançoire");
         dialog.setTitle("Renommer la sélection");
         dialog.setHeaderText("Entrez votre nouveau nom :");

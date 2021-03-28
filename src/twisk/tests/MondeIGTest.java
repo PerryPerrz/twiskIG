@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import twisk.exceptions.ArcAlreadyCreateException;
 import twisk.exceptions.CreateArcWithEndPdcException;
 import twisk.exceptions.SameActivityException;
-import twisk.mondeIG.ArcIG;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.FabriqueIdentifiant;
@@ -37,7 +36,7 @@ class MondeIGTest {
     void iterator() {
         int cpt = 0;
         monde.ajouter("Activite");
-        for(Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();){
+        for (Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext(); ) {
             EtapeIG e = iter.next();
             assertEquals(e.getIdentifiant(), "" + cpt); //Bonnes étapes
             cpt++;
@@ -47,7 +46,7 @@ class MondeIGTest {
         monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("1"));
         monde.supprimerLaSelection();
         cpt = 0;
-        for(Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();){
+        for (Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext(); ) {
             EtapeIG e = iter.next();
             assertEquals(e.getIdentifiant(), "" + cpt);
             cpt += 2;
@@ -57,7 +56,7 @@ class MondeIGTest {
         monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("3"));
         monde.supprimerLaSelection();
         cpt = 0;
-        for(Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();){
+        for (Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext(); ) {
             EtapeIG e = iter.next();
             assertEquals(e.getIdentifiant(), "" + cpt);
             cpt += 2;
@@ -67,7 +66,7 @@ class MondeIGTest {
         monde.ajouterEtapeSelectionnee(monde.getEtapeIndice("2"));
         monde.supprimerLaSelection();
         cpt = 0;
-        for(Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext();){
+        for (Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext(); ) {
             EtapeIG e = iter.next();
             assertEquals(e.getIdentifiant(), "" + cpt);
             cpt += 4;

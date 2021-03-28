@@ -1,7 +1,5 @@
 package twisk.mondeIG;
 
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.shape.Arc;
 import twisk.designPattern.SujetObserve;
 import twisk.exceptions.ArcAlreadyCreateException;
 import twisk.exceptions.CreateArcWithEndPdcException;
@@ -77,7 +75,7 @@ public class MondeIG extends SujetObserve {
 
     public void creationArc(PointDeControleIG pdc) throws TwiskException {
         boolean isCreated = false;
-        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext();) {
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
             EtapeIG etape = iter.next();
             for (PointDeControleIG pdcIG : etape) {
                 //Je cherche dans tous les pdc si il y en a un qui est true, le pdc en paramètre est le 2éme pdc qu'on à cliqué
@@ -119,7 +117,7 @@ public class MondeIG extends SujetObserve {
     }
 
     public void supprimerLaSelection() {
-        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext();) {
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
             supprimer(iter);
         }
         this.notifierObservateurs();
@@ -129,9 +127,9 @@ public class MondeIG extends SujetObserve {
         ArcIG arc;
         EtapeIG e = iterE.next();
         if (isSelectionned(e)) {
-            for(Iterator<ArcIG> iter = this.iteratorArcs(); iter.hasNext();){
+            for (Iterator<ArcIG> iter = this.iteratorArcs(); iter.hasNext(); ) {
                 arc = iter.next();
-                if(arc.isLinkedToStage(e)){
+                if (arc.isLinkedToStage(e)) {
                     iter.remove();
                     arcs.remove(arc);
                 }
@@ -142,13 +140,24 @@ public class MondeIG extends SujetObserve {
         }
     }
 
-    public void renommerLaSelection(String newName){
-        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext();) {
+    public void renommerLaSelection(String newName) {
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
             EtapeIG e = iter.next();
-            if(this.isSelectionned(e)){
+            if (this.isSelectionned(e)) {
                 e.setNom(newName);
             }
         }
         notifierObservateurs();
+    }
+
+    public int nbEtapesSelectionnees() {
+        int cpt = 0;
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
+            EtapeIG e = iter.next();
+            if (this.isSelectionned(e)) {
+                cpt++;
+            }
+        }
+        return cpt;
     }
 }
