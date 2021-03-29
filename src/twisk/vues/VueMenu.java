@@ -27,12 +27,15 @@ public class VueMenu extends MenuBar implements Observateur {
         MenuItem quitter = new MenuItem();
         MenuItem supprimer = new MenuItem();
         MenuItem renommer = new MenuItem();
+        MenuItem effacer = new MenuItem();
         this.fichier.getItems().add(quitter);
         this.edition.getItems().add(supprimer);
         this.edition.getItems().add(renommer);
+        this.edition.getItems().add(effacer);
         quitter.setOnAction(actionEvent -> Platform.exit());
         supprimer.setOnAction(actionEvent -> monde.supprimerLaSelection());
         renommer.setOnAction(actionEvent -> this.rename());
+        effacer.setOnAction(actionEvent -> monde.effacerLaSelection());
 
         TailleComposants tc = TailleComposants.getInstance();
         Image image3 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/file.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
@@ -56,6 +59,10 @@ public class VueMenu extends MenuBar implements Observateur {
         renommer.setGraphic(icon5);
 
         renommer.setDisable(true);
+
+        Image image6 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/select.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
+        ImageView icon6 = new ImageView(image6);
+        effacer.setGraphic(icon6);
 
         this.getMenus().addAll(fichier, edition);
     }

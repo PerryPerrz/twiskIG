@@ -30,7 +30,9 @@ public class VueArcIG extends Pane implements Observateur {
         triangle.setFill(Color.BLUEVIOLET);
         triangle.setStrokeWidth(tc.getLargLigne());
         this.getChildren().addAll(ligne, triangle);
-        this.setOnMouseClicked(MouseEvent -> monde.selectionArc(this.arc));
+
+        ligne.setOnMouseClicked(MouseEvent -> monde.selectionArc(this.arc));
+        triangle.setOnMouseClicked(MouseEvent -> monde.selectionArc(this.arc));
     }
 
     public void reagir() {

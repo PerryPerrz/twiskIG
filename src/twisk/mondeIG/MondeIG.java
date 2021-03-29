@@ -181,4 +181,15 @@ public class MondeIG extends SujetObserve {
     public boolean isSelectionned(ArcIG arc) {
         return arc.isSelected();
     }
+
+    public void effacerLaSelection() {
+        etapesSelectionnees.clear();
+        for (Iterator<ArcIG> iterA = iteratorArcs(); iterA.hasNext(); ) {
+            ArcIG arc = iterA.next();
+            if (arc.isSelected()) {
+                arc.setSelect(false);
+            }
+        }
+        notifierObservateurs();
+    }
 }
