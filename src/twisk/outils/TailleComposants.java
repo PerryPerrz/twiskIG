@@ -14,6 +14,9 @@ public class TailleComposants {
     private final int tailleIcons;
     private final int tailleIcons2;
 
+    /**
+     * Constructeur de la classe TailleComposants, il permet d'initialiser toutes les tailles utilisées dans l'application twiskIG
+     */
     private TailleComposants() {
         this.larg = 80;
         this.haut = 40;
@@ -28,50 +31,110 @@ public class TailleComposants {
         this.tailleIcons2 = 25;
     }
 
+    /**
+     * Fonction permettant de réaliser une instance du singleton TailleComposants
+     *
+     * @return
+     */
     public static TailleComposants getInstance() {
         return instance;
     }
 
+    /**
+     * Fonction qui retourne la largeur d'une activité
+     *
+     * @return
+     */
     public int getLarg() {
         return larg;
     }
 
+    /**
+     * Fonction qui retourne la hauteur d'une activité
+     *
+     * @return
+     */
     public int getHaut() {
         return haut;
     }
 
+    /**
+     * Fonction qui retourne la taille du bouton permettant d'ajouter des activités
+     *
+     * @return
+     */
     public int getTailleBouton() {
         return tailleBouton;
     }
 
+    /**
+     * Fonction qui retourne la largeur de la fenêtre de l'application
+     *
+     * @return
+     */
     public int getWindowX() {
         return windowX;
     }
 
+    /**
+     * Fonction qui retourne la hauteur de la fenêtre de l'application
+     *
+     * @return
+     */
     public int getWindowY() {
         return windowY;
     }
 
+    /**
+     * Fonction qui retourne la taille du rayon des points de contrôles
+     *
+     * @return
+     */
     public int getRad() {
         return rad;
     }
 
+    /**
+     * Fonction qui retourne la largeur de la ligne qui permet de former le corps des arcs
+     *
+     * @return
+     */
     public int getLargLigne() {
         return this.largLigne;
     }
 
+    /**
+     * Fonction qui retourne la longueur du triangle qui permet de former la tête des arcs
+     *
+     * @return
+     */
     public int getLongTri() {
         return longTri;
     }
 
+    /**
+     * Fonction qui retourne la largeur du triangle qui permet de former la tête des arcs
+     *
+     * @return
+     */
     public int getLargTri() {
         return largTri;
     }
 
+    /**
+     * Fonction qui retourne la taille des icones des différentes exceptions qui peuvent se déclancher lors de la création d'arc
+     *
+     * @return
+     */
     public int getTailleIcons() {
         return tailleIcons;
     }
 
+    /**
+     * Fonction qui retourne la taille des icones utilisés lors de la création du menu
+     *
+     * @return
+     */
     public int getTailleIcons2() {
         return tailleIcons2;
     }

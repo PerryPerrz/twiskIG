@@ -5,23 +5,44 @@ public class FabriqueIdentifiant {
     private int noEtape;
     private int noPdc;
 
+    /**
+     * Constructeur de la classe FabriqueIdentifiant permettant d'initialiser les attributs noEtape et noPdc
+     */
     private FabriqueIdentifiant() {
         this.noEtape = 0;
         this.noPdc = 0;
     }
 
+    /**
+     * Fonction permettant de réaliser une instance du singleton FabriqueIdentifiant
+     *
+     * @return
+     */
     public static FabriqueIdentifiant getInstance() {
         return instance;
     }
 
+    /**
+     * Fonction permettant de récupérer le numéro d'une étape
+     *
+     * @return
+     */
     public String getIdentifiantEtape() {
         return "" + this.noEtape++;
     }
 
+    /**
+     * Fonction permettant de récupérer le numéro d'un point de contrôle
+     *
+     * @return
+     */
     public String getIdentifiantPdc() {
         return "" + this.noPdc++;
     }
 
+    /**
+     * Procédure permettant de ré-initialiser le numéro d'étape
+     */
     public void reset() {
         this.noEtape = 0;
     }
