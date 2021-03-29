@@ -1,5 +1,7 @@
 package twisk.vues;
 
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import twisk.designPattern.Observateur;
 import twisk.mondeIG.ArcIG;
@@ -31,6 +33,29 @@ public class VueMondeIG extends Pane implements Observateur {
                 viewPdc.reagir();
             }
         }
+        this.setOnDragOver(dragEvent -> {
+            if (dragEvent.getDragboard().hasString()) { //Si le dragDropped renvoie bien un string, je peux bouger
+                dragEvent.acceptTransferModes(TransferMode.MOVE);
+            }
+            dragEvent.consume();
+        });
+
+        this.setOnDragDropped(dragEvent -> {
+            Dragboard db = dragEvent.getDragboard();
+            // Get item id here, which was stored when the drag started.
+            boolean success = false;
+            if (db.hasString()) {
+                String indice = db.getString();
+                VueEtapeIG image = (VueEtapeIG) this.lookup("#" + indice); //On cherche dans la VueMondeIG, la VueEtapeIG qui s'est fait drag and drop
+                if (image != null) { //Si l'objet drag n drop existe et si c'est bien une VueEtapeIG
+                    //On change l'emplacement de l'étape
+                    monde.changerEmplacementEtape(indice, (int) dragEvent.getX(), (int) dragEvent.getY());
+                    success = true;
+                }
+            }
+            dragEvent.setDropCompleted(success);
+            dragEvent.consume();
+        });
     }
 
     @Override

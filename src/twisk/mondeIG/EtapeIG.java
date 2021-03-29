@@ -78,4 +78,9 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public void setPosXPosY(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
+    }
 }

@@ -160,4 +160,8 @@ public class MondeIG extends SujetObserve {
         }
         return cpt;
     }
+
+    public void changerEmplacementEtape(String indice, int x, int y) {
+        this.getEtapeIndice(indice).setPosXPosY(x, y);
+    }
 }
