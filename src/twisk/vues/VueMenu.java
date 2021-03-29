@@ -17,6 +17,7 @@ public class VueMenu extends MenuBar implements Observateur {
     private final MondeIG monde;
     private final Menu fichier;
     private final Menu edition;
+    private final Menu mondeMenu;
 
     public VueMenu(MondeIG monde) {
         this.monde = monde;
@@ -24,18 +25,26 @@ public class VueMenu extends MenuBar implements Observateur {
 
         fichier = new Menu("Fichier");
         edition = new Menu("Edition");
+        mondeMenu = new Menu("Monde");
         MenuItem quitter = new MenuItem();
         MenuItem supprimer = new MenuItem();
         MenuItem renommer = new MenuItem();
         MenuItem effacer = new MenuItem();
+        MenuItem entree = new MenuItem();
+        MenuItem sortie = new MenuItem();
         this.fichier.getItems().add(quitter);
         this.edition.getItems().add(supprimer);
         this.edition.getItems().add(renommer);
         this.edition.getItems().add(effacer);
+        this.mondeMenu.getItems().add(entree);
+        this.mondeMenu.getItems().add(sortie);
+
         quitter.setOnAction(actionEvent -> Platform.exit());
         supprimer.setOnAction(actionEvent -> monde.supprimerLaSelection());
         renommer.setOnAction(actionEvent -> this.rename());
         effacer.setOnAction(actionEvent -> monde.effacerLaSelection());
+        entree.setOnAction(actionEvent -> monde.setEntree());
+        sortie.setOnAction(actionEvent -> monde.setSortie());
 
         TailleComposants tc = TailleComposants.getInstance();
         Image image3 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/file.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
@@ -45,6 +54,10 @@ public class VueMenu extends MenuBar implements Observateur {
         Image image4 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/edit.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
         ImageView icon4 = new ImageView(image4);
         edition.setGraphic(icon4);
+
+        Image image9 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/world.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
+        ImageView icon9 = new ImageView(image9);
+        mondeMenu.setGraphic(icon9);
 
         Image image = new Image(getClass().getResourceAsStream("/twisk/ressources/images/exit.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
         ImageView icon = new ImageView(image);
@@ -64,7 +77,15 @@ public class VueMenu extends MenuBar implements Observateur {
         ImageView icon6 = new ImageView(image6);
         effacer.setGraphic(icon6);
 
-        this.getMenus().addAll(fichier, edition);
+        Image image7 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/entree.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
+        ImageView icon7 = new ImageView(image7);
+        entree.setGraphic(icon7);
+
+        Image image8 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/sortie.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
+        ImageView icon8 = new ImageView(image8);
+        sortie.setGraphic(icon8);
+
+        this.getMenus().addAll(fichier, edition, mondeMenu);
     }
 
     @Override

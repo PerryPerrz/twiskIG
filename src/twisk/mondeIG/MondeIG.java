@@ -192,4 +192,22 @@ public class MondeIG extends SujetObserve {
         }
         notifierObservateurs();
     }
+
+    public void setEntree() {
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
+            EtapeIG e = iter.next();
+            if (this.isSelectionned(e)) {
+                e.invEntree();
+            }
+        }
+    }
+
+    public void setSortie() {
+        for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
+            EtapeIG e = iter.next();
+            if (this.isSelectionned(e)) {
+                e.invSortie();
+            }
+        }
+    }
 }
