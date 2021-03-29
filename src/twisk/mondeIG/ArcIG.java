@@ -3,10 +3,12 @@ package twisk.mondeIG;
 public class ArcIG {
     private final PointDeControleIG PdcDepart;
     private final PointDeControleIG PdcArrive;
+    private boolean select; //Variable booléenne indiquant si un arc à été selectionné ou non par l'utilisateur.
 
     public ArcIG(PointDeControleIG PdcD, PointDeControleIG PdcA) {
         this.PdcDepart = PdcD;
         this.PdcArrive = PdcA;
+        this.select = false;
     }
 
     public PointDeControleIG getPdcDepart() {
@@ -25,5 +27,13 @@ public class ArcIG {
             }
         }
         return false;
+    }
+
+    public boolean isSelected() {
+        return this.select;
+    }
+
+    public void setSelect(boolean select) {
+        this.select = select;
     }
 }

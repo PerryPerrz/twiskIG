@@ -120,6 +120,14 @@ public class MondeIG extends SujetObserve {
         for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
             supprimer(iter);
         }
+        for (Iterator<ArcIG> iterA = iteratorArcs(); iterA.hasNext(); ) {
+            ArcIG arc = iterA.next();
+            if (arc.isSelected()) {
+                arc.setSelect(false);
+                iterA.remove();
+                this.arcs.remove(arc);
+            }
+        }
         this.notifierObservateurs();
     }
 
@@ -163,5 +171,14 @@ public class MondeIG extends SujetObserve {
 
     public void changerEmplacementEtape(String indice, int x, int y) {
         this.getEtapeIndice(indice).setPosXPosY(x, y);
+    }
+
+    public void selectionArc(ArcIG arc) {
+        arc.setSelect(true);
+        notifierObservateurs();
+    }
+
+    public boolean isSelectionned(ArcIG arc) {
+        return arc.isSelected();
     }
 }
