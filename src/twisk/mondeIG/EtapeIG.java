@@ -80,7 +80,14 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     }
 
     public void setPosXPosY(int posX, int posY) {
+        TailleComposants tc = TailleComposants.getInstance();
         this.posX = posX;
         this.posY = posY;
+
+        //On raffraichit les points de contrôles lors du drag and drop
+        pdc[0].setCentre(this.posX + tc.getLarg() / 2, this.posY);
+        pdc[1].setCentre(this.posX + tc.getLarg() / 2, this.posY + tc.getHaut());
+        pdc[2].setCentre(this.posX, this.posY + tc.getHaut() / 2);
+        pdc[3].setCentre(this.posX + tc.getLarg(), this.posY + tc.getHaut() / 2);
     }
 }

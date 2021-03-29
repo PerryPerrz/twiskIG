@@ -155,7 +155,7 @@ public class MondeIG extends SujetObserve {
                 e.setNom(newName);
             }
         }
-        notifierObservateurs();
+        this.effacerLaSelection();
     }
 
     public int nbEtapesSelectionnees() {
