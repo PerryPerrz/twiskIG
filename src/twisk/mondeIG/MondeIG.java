@@ -1,10 +1,7 @@
 package twisk.mondeIG;
 
 import twisk.designPattern.SujetObserve;
-import twisk.exceptions.ArcAlreadyCreateException;
-import twisk.exceptions.CreateArcWithEndPdcException;
-import twisk.exceptions.SameActivityException;
-import twisk.exceptions.TwiskException;
+import twisk.exceptions.*;
 import twisk.outils.FabriqueIdentifiant;
 
 import java.util.ArrayList;
@@ -171,6 +168,7 @@ public class MondeIG extends SujetObserve {
 
     public void changerEmplacementEtape(String indice, int x, int y) {
         this.getEtapeIndice(indice).setPosXPosY(x, y);
+        this.notifierObservateurs();
     }
 
     public void selectionArc(ArcIG arc) {
@@ -209,5 +207,47 @@ public class MondeIG extends SujetObserve {
                 e.invSortie();
             }
         }
+    }
+
+    public void setDelai(String d) throws UncorrectSettingsException {
+        try {
+            int dBis = Integer.parseInt(d);
+            if (dBis < 0) {
+                throw new UncorrectSettingsException("Attention, un délai ne peut pas être négatif!");
+            }
+            for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
+                EtapeIG eta = iter.next();
+                if (this.isSelectionned(eta)) {
+                    if (dBis < eta.getEcart()) {
+                        throw new UncorrectSettingsException("Attention, un délai ne peut pas être inférieur à un écart!");
+                    }
+                    eta.setDelai(dBis);
+                }
+            }
+        } catch (NumberFormatException nFE) {
+            throw new UncorrectSettingsException("Les paramètres saisis pour le délai sont erronés!");
+        }
+        notifierObservateurs();
+    }
+
+    public void setEcart(String e) throws UncorrectSettingsException {
+        try {
+            int eBis = Integer.parseInt(e);
+            if (eBis < 0) {
+                throw new UncorrectSettingsException("Attention, un écart ne peut pas être négatif!");
+            }
+            for (Iterator<EtapeIG> iter = iterator(); iter.hasNext(); ) {
+                EtapeIG eta = iter.next();
+                if (this.isSelectionned(eta)) {
+                    if (eBis > eta.getDelai()) {
+                        throw new UncorrectSettingsException("Attention, un écart ne peut pas être supérieur à un délai!");
+                    }
+                    eta.setEcart(eBis);
+                }
+            }
+        } catch (NumberFormatException nFE) {
+            throw new UncorrectSettingsException("Les paramètres saisis pour l'écart sont erronés!");
+        }
+        notifierObservateurs();
     }
 }

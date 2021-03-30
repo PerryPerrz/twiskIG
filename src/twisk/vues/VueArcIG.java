@@ -42,7 +42,7 @@ public class VueArcIG extends Pane implements Observateur {
         this.getChildren().addAll(ligne, triangle);
         if (monde.isSelectionned(arc)) {
             ligne.setStroke(Color.LIGHTGREEN);
-            triangle.setStroke(Color.LIGHTPINK);
+            triangle.setStroke(Color.GREENYELLOW);
             triangle.setFill(Color.LIGHTGREEN);
         }
     }

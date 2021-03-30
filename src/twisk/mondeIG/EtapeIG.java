@@ -14,6 +14,8 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     protected PointDeControleIG[] pdc;
     protected boolean entree;
     protected boolean sortie;
+    protected int delai;
+    protected int ecart;
 
     public EtapeIG(String nom, String idf) {
         this.nom = nom;
@@ -21,6 +23,8 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         pdc = new PointDeControleIG[4];
         this.entree = false;
         this.sortie = false;
+        this.delai = 0;
+        this.ecart = 0;
         FabriqueIdentifiant fabrik = FabriqueIdentifiant.getInstance();
 
         for (int i = 0; i < this.pdc.length; ++i) {
@@ -101,5 +105,21 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
     public void invSortie() {
         this.sortie = !this.sortie;
+    }
+
+    public int getDelai() {
+        return delai;
+    }
+
+    public int getEcart() {
+        return ecart;
+    }
+
+    public void setDelai(int delai) {
+        this.delai = delai;
+    }
+
+    public void setEcart(int ecart) {
+        this.ecart = ecart;
     }
 }

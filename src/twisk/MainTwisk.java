@@ -31,12 +31,6 @@ public class MainTwisk extends Application {
         VueMondeIG viewM = new VueMondeIG(monde);
         VueMenu viewMe = new VueMenu(monde);
         TailleComposants tc = TailleComposants.getInstance();
-
-        /*
-        Media media = new Media(new File("src/ressources/sounds/crabrave.wav").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();*/
-
         root.setBottom(viewO);
         root.setCenter(viewM);
         root.setRight(viewMe);
