@@ -13,6 +13,7 @@ public class TailleComposants {
     private final int largTri;
     private final int tailleIcons;
     private final int tailleIcons2;
+    private final int tailleIcons3;
 
     /**
      * Constructeur de la classe TailleComposants, il permet d'initialiser toutes les tailles utilisées dans l'application twiskIG
@@ -29,6 +30,7 @@ public class TailleComposants {
         this.largTri = 6;
         this.tailleIcons = 50;
         this.tailleIcons2 = 25;
+        this.tailleIcons3 = 15;
     }
 
     /**
@@ -137,5 +139,14 @@ public class TailleComposants {
      */
     public int getTailleIcons2() {
         return tailleIcons2;
+    }
+
+    /**
+     * Fonction qui retourne la taille des icones utilisés lors de la création du menu
+     *
+     * @return
+     */
+    public int getTailleIcons3() {
+        return tailleIcons3;
     }
 }

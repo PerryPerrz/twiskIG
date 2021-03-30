@@ -198,6 +198,7 @@ public class MondeIG extends SujetObserve {
                 e.invEntree();
             }
         }
+        notifierObservateurs();
     }
 
     public void setSortie() {
@@ -207,6 +208,7 @@ public class MondeIG extends SujetObserve {
                 e.invSortie();
             }
         }
+        notifierObservateurs();
     }
 
     public void setDelai(String d) throws UncorrectSettingsException {

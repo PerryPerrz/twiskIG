@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import twisk.designPattern.Observateur;
-import twisk.exceptions.ArcAlreadyCreateException;
 import twisk.exceptions.UncorrectSettingsException;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.TailleComposants;
@@ -19,7 +18,7 @@ public class VueMenu extends MenuBar implements Observateur {
     private final Menu fichier;
     private final Menu edition;
     private final Menu mondeMenu;
-    private Menu parametres;
+    private final Menu parametres;
 
     public VueMenu(MondeIG monde) {
         this.monde = monde;
@@ -136,7 +135,7 @@ public class VueMenu extends MenuBar implements Observateur {
         result.ifPresent(name -> this.monde.renommerLaSelection(name));
     }
 
-    public void delai(){
+    public void delai() {
         TextInputDialog dialog = new TextInputDialog("10");
         dialog.setTitle("Délai d'une activité");
         dialog.setHeaderText("Entrez votre délai :");
@@ -149,28 +148,28 @@ public class VueMenu extends MenuBar implements Observateur {
 
         Optional<String> result = dialog.showAndWait();
 
-        result.ifPresent(d-> {
+        result.ifPresent(d -> {
             try {
                 this.monde.setDelai(d);
             } catch (UncorrectSettingsException uSE) {
-                    Alert dia = new Alert(Alert.AlertType.ERROR);
-                    dia.setTitle("UncorrectSettingsException");
-                    dia.setHeaderText("Impossible de saisir ce délai");
-                    dia.setContentText("Erreur : La saisie du délai est incorrecte\n" +
-                            "Veuillez ré-essayer");
-                    Image image2 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/warning.png"), tc.getTailleIcons(), tc.getTailleIcons(), true, true);
-                    ImageView icon2 = new ImageView(image2);
-                    dia.setGraphic(icon2);
-                    dia.show();
-                    //Le chronomètre
-                    PauseTransition pt = new PauseTransition(Duration.seconds(5));
-                    pt.setOnFinished(Event -> dia.close());
-                    pt.play();
+                Alert dia = new Alert(Alert.AlertType.ERROR);
+                dia.setTitle("UncorrectSettingsException");
+                dia.setHeaderText("Impossible de saisir ce délai");
+                dia.setContentText("Erreur : La saisie du délai est incorrecte\n" +
+                        "Veuillez ré-essayer");
+                Image image2 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/warning.png"), tc.getTailleIcons(), tc.getTailleIcons(), true, true);
+                ImageView icon2 = new ImageView(image2);
+                dia.setGraphic(icon2);
+                dia.show();
+                //Le chronomètre
+                PauseTransition pt = new PauseTransition(Duration.seconds(5));
+                pt.setOnFinished(Event -> dia.close());
+                pt.play();
             }
         });
     }
 
-    public void ecart(){
+    public void ecart() {
         TextInputDialog dialog = new TextInputDialog("10");
         dialog.setTitle("Écart d'une activité");
         dialog.setHeaderText("Entrez votre écart :");

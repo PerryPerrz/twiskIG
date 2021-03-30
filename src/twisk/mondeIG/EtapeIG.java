@@ -13,6 +13,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     protected int posY;
     protected PointDeControleIG[] pdc;
     protected boolean entree;
+
     protected boolean sortie;
     protected int delai;
     protected int ecart;
@@ -121,5 +122,13 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
     public void setEcart(int ecart) {
         this.ecart = ecart;
+    }
+
+    public boolean estUneEntree() {
+        return entree;
+    }
+
+    public boolean estUneSortie() {
+        return sortie;
     }
 }
