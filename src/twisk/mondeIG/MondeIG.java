@@ -23,7 +23,7 @@ public class MondeIG extends SujetObserve {
         String id = fabID.getIdentifiantEtape();
         ActiviteIG activite = new ActiviteIG("Activité n°" + id, id);
         this.etapes.put(id, activite);
-        this.style = 0;
+        this.style = 2;
     }
 
     public void ajouter(String type) {
@@ -174,8 +174,9 @@ public class MondeIG extends SujetObserve {
     }
 
     public void selectionArc(ArcIG arc) {
-        arc.setSelect(true);
+        arc.setSelect(!arc.isSelected());
         notifierObservateurs();
+
     }
 
     public boolean isSelectionned(ArcIG arc) {

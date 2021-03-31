@@ -2,8 +2,8 @@ package twisk.outils;
 
 public class TailleComposants {
     private static final TailleComposants instance = new TailleComposants();
-    private final int larg;
-    private final int haut;
+    private final int largAct;
+    private final int hautAct;
     private final int tailleBouton;
     private final int windowX;
     private final int windowY;
@@ -19,8 +19,8 @@ public class TailleComposants {
      * Constructeur de la classe TailleComposants, il permet d'initialiser toutes les tailles utilisées dans l'application twiskIG
      */
     private TailleComposants() {
-        this.larg = 80;
-        this.haut = 40;
+        this.largAct = 120;
+        this.hautAct = 44;
         this.tailleBouton = 30;
         this.windowX = 700;
         this.windowY = 600;
@@ -47,8 +47,8 @@ public class TailleComposants {
      *
      * @return
      */
-    public int getLarg() {
-        return larg;
+    public int getLargAct() {
+        return largAct;
     }
 
     /**
@@ -56,8 +56,8 @@ public class TailleComposants {
      *
      * @return
      */
-    public int getHaut() {
-        return haut;
+    public int getHautAct() {
+        return hautAct;
     }
 
     /**

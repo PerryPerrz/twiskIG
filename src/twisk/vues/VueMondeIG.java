@@ -24,7 +24,7 @@ public class VueMondeIG extends Pane implements Observateur {
             //On met à jour le modèle avant de mettre à jour la vue.
             etape.randomPositions();
             VueActiviteIG viewA = new VueActiviteIG(this.monde, etape);
-            viewA.setMinSize(tC.getLarg(), tC.getHaut());
+            viewA.setMinSize(tC.getLargAct(), tC.getHautAct());
             this.getChildren().add(viewA);
             viewA.reagir();
             for (PointDeControleIG pdc : etape) {
@@ -71,7 +71,7 @@ public class VueMondeIG extends Pane implements Observateur {
         for (Iterator<EtapeIG> iter = monde.iterator(); iter.hasNext(); ) {
             EtapeIG etape = iter.next();
             VueActiviteIG viewA = new VueActiviteIG(this.monde, etape);
-            viewA.setMinSize(tC.getLarg(), tC.getHaut());
+            viewA.setMinSize(tC.getLargAct(), tC.getHautAct());
             this.getChildren().add(viewA);
             for (PointDeControleIG pdc : etape) {
                 VuePointDeControleIG viewPdc = new VuePointDeControleIG(this.monde, pdc);
@@ -80,11 +80,13 @@ public class VueMondeIG extends Pane implements Observateur {
         }
         switch (monde.getStyle()) {
             case 0:
-                this.getParent().setStyle("-fx-background-color : WHITE");
+                this.getParent().setStyle("-fx-background-color : #ffe268");
                 break;
             case 1:
-                this.getParent().setStyle("-fx-background-color : BLACK");
+                this.getParent().setStyle("-fx-background-color : #151515");
                 break;
+            case 2:
+                this.getParent().setStyle("-fx-background-color : #FFFFFF");
         }
     }
 }

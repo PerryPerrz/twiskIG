@@ -23,8 +23,8 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         pdc = new PointDeControleIG[4];
         this.entree = false;
         this.sortie = false;
-        this.delai = 0;
-        this.ecart = 0;
+        this.delai = 8;
+        this.ecart = 4;
         FabriqueIdentifiant fabrik = FabriqueIdentifiant.getInstance();
 
         for (int i = 0; i < this.pdc.length; ++i) {
@@ -34,15 +34,20 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     }
 
     public void randomPositions() {
-        TailleComposants tc = TailleComposants.getInstance();
         Random random = new Random();
-        this.posX = random.nextInt(650);
-        this.posY = random.nextInt(550);
+        TailleComposants tc = TailleComposants.getInstance();
+        //On fait en sorte que les activités ne se créent pas sur le menu ni sur le boutton "ajouter"
+        this.posX = random.nextInt(tc.getWindowX() - tc.getLargAct() - tc.getRad() * 2) + tc.getRad() * 2;
+        this.posY = random.nextInt(tc.getWindowY() - tc.getHautAct() - tc.getTailleBouton() - tc.getTailleIcons2() * 2 - tc.getRad()) + tc.getTailleIcons2() * 2 + tc.getRad();
+        this.raffraichissementPdc();
+    }
 
-        pdc[0].setCentre(this.posX + tc.getLarg() / 2, this.posY);
-        pdc[1].setCentre(this.posX + tc.getLarg() / 2, this.posY + tc.getHaut());
-        pdc[2].setCentre(this.posX, this.posY + tc.getHaut() / 2);
-        pdc[3].setCentre(this.posX + tc.getLarg(), this.posY + tc.getHaut() / 2);
+    public void raffraichissementPdc() {
+        TailleComposants tc = TailleComposants.getInstance();
+        pdc[0].setCentre(this.posX + tc.getLargAct() / 2, this.posY);
+        pdc[1].setCentre(this.posX + tc.getLargAct() / 2, this.posY + tc.getHautAct());
+        pdc[2].setCentre(this.posX, this.posY + tc.getHautAct() / 2);
+        pdc[3].setCentre(this.posX + tc.getLargAct(), this.posY + tc.getHautAct() / 2);
     }
 
     public String getIdentifiant() {
@@ -93,10 +98,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         this.posY = posY;
 
         //On raffraichit les points de contrôles lors du drag and drop
-        pdc[0].setCentre(this.posX + tc.getLarg() / 2, this.posY);
-        pdc[1].setCentre(this.posX + tc.getLarg() / 2, this.posY + tc.getHaut());
-        pdc[2].setCentre(this.posX, this.posY + tc.getHaut() / 2);
-        pdc[3].setCentre(this.posX + tc.getLarg(), this.posY + tc.getHaut() / 2);
+        pdc[0].setCentre(this.posX + tc.getLargAct() / 2, this.posY);
+        pdc[1].setCentre(this.posX + tc.getLargAct() / 2, this.posY + tc.getHautAct());
+        pdc[2].setCentre(this.posX, this.posY + tc.getHautAct() / 2);
+        pdc[3].setCentre(this.posX + tc.getLargAct(), this.posY + tc.getHautAct() / 2);
     }
 
     public void invEntree() {

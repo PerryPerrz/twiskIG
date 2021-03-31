@@ -26,7 +26,7 @@ public class VueArcIG extends Pane implements Observateur {
         TailleComposants tc = TailleComposants.getInstance();
         ligne.setStroke(Color.BLUEVIOLET);
         ligne.setStrokeWidth(tc.getLargLigne());
-        triangle.setStroke(Color.BLACK);
+        triangle.setStroke(Color.BLUEVIOLET);
         triangle.setFill(Color.BLUEVIOLET);
         triangle.setStrokeWidth(tc.getLargLigne());
         this.getChildren().addAll(ligne, triangle);
@@ -41,9 +41,9 @@ public class VueArcIG extends Pane implements Observateur {
         this.apparitionDuTriangle();
         this.getChildren().addAll(ligne, triangle);
         if (monde.isSelectionned(arc)) {
-            ligne.setStroke(Color.LIGHTGREEN);
-            triangle.setStroke(Color.GREENYELLOW);
-            triangle.setFill(Color.LIGHTGREEN);
+            ligne.setStroke(Color.valueOf("#f4abc4"));
+            triangle.setStroke(Color.valueOf("#f4abc4"));
+            triangle.setFill(Color.valueOf("#f4abc4"));
         }
     }
 
