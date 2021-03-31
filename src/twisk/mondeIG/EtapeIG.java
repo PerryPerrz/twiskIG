@@ -13,7 +13,6 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     protected int posY;
     protected PointDeControleIG[] pdc;
     protected boolean entree;
-
     protected boolean sortie;
     protected int delai;
     protected int ecart;

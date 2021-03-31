@@ -78,5 +78,13 @@ public class VueMondeIG extends Pane implements Observateur {
                 this.getChildren().add(viewPdc);
             }
         }
+        switch (monde.getStyle()) {
+            case 0:
+                this.getParent().setStyle("-fx-background-color : WHITE");
+                break;
+            case 1:
+                this.getParent().setStyle("-fx-background-color : BLACK");
+                break;
+        }
     }
 }

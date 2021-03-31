@@ -19,6 +19,7 @@ public class VueMenu extends MenuBar implements Observateur {
     private final Menu edition;
     private final Menu mondeMenu;
     private final Menu parametres;
+    private final Menu style;
 
     public VueMenu(MondeIG monde) {
         this.monde = monde;
@@ -28,6 +29,7 @@ public class VueMenu extends MenuBar implements Observateur {
         edition = new Menu("Edition");
         mondeMenu = new Menu("Monde");
         parametres = new Menu("Paramètres");
+        style = new Menu(("Style"));
         MenuItem quitter = new MenuItem();
         MenuItem supprimer = new MenuItem();
         MenuItem renommer = new MenuItem();
@@ -36,6 +38,9 @@ public class VueMenu extends MenuBar implements Observateur {
         MenuItem sortie = new MenuItem("Sortie");
         MenuItem delai = new MenuItem("Délai");
         MenuItem ecart = new MenuItem("Écart");
+        MenuItem jour = new MenuItem("Jour");
+        MenuItem nuit = new MenuItem("Nuit");
+
         this.fichier.getItems().add(quitter);
         this.edition.getItems().add(supprimer);
         this.edition.getItems().add(renommer);
@@ -44,6 +49,8 @@ public class VueMenu extends MenuBar implements Observateur {
         this.mondeMenu.getItems().add(sortie);
         this.parametres.getItems().add(delai);
         this.parametres.getItems().add(ecart);
+        this.style.getItems().add(jour);
+        this.style.getItems().add(nuit);
 
         quitter.setOnAction(actionEvent -> Platform.exit());
         supprimer.setOnAction(actionEvent -> monde.supprimerLaSelection());
@@ -53,6 +60,8 @@ public class VueMenu extends MenuBar implements Observateur {
         sortie.setOnAction(actionEvent -> monde.setSortie());
         delai.setOnAction(actionEvent -> this.delai());
         ecart.setOnAction(actionEvent -> this.ecart());
+        jour.setOnAction(actionEvent -> monde.setStyle(0));
+        nuit.setOnAction(actionEvent -> monde.setStyle(1));
 
         TailleComposants tc = TailleComposants.getInstance();
         Image image3 = new Image(getClass().getResourceAsStream("/twisk/ressources/images/file.png"), tc.getTailleIcons2(), tc.getTailleIcons2(), true, true);
@@ -109,7 +118,7 @@ public class VueMenu extends MenuBar implements Observateur {
 
         ecart.setDisable(true);
 
-        this.getMenus().addAll(fichier, edition, mondeMenu, parametres);
+        this.getMenus().addAll(fichier, edition, mondeMenu, parametres, style);
     }
 
     @Override

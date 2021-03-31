@@ -12,6 +12,7 @@ public class MondeIG extends SujetObserve {
     private final HashMap<String, EtapeIG> etapes;
     private final ArrayList<EtapeIG> etapesSelectionnees;
     private final ArrayList<ArcIG> arcs;
+    private int style;
 
     public MondeIG() {
         super();
@@ -22,6 +23,7 @@ public class MondeIG extends SujetObserve {
         String id = fabID.getIdentifiantEtape();
         ActiviteIG activite = new ActiviteIG("Activité n°" + id, id);
         this.etapes.put(id, activite);
+        this.style = 0;
     }
 
     public void ajouter(String type) {
@@ -251,5 +253,14 @@ public class MondeIG extends SujetObserve {
             throw new UncorrectSettingsException("Les paramètres saisis pour l'écart sont erronés!");
         }
         notifierObservateurs();
+    }
+
+    public void setStyle(int i) {
+        this.style = i;
+        notifierObservateurs();
+    }
+
+    public int getStyle() {
+        return this.style;
     }
 }
