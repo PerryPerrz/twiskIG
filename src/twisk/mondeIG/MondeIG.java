@@ -202,6 +202,7 @@ public class MondeIG extends SujetObserve {
             }
         }
         notifierObservateurs();
+        this.effacerLaSelection();
     }
 
     public void setSortie() {
@@ -212,6 +213,7 @@ public class MondeIG extends SujetObserve {
             }
         }
         notifierObservateurs();
+        this.effacerLaSelection();
     }
 
     public void setDelai(String d) throws UncorrectSettingsException {
@@ -233,6 +235,7 @@ public class MondeIG extends SujetObserve {
             throw new UncorrectSettingsException("Les paramètres saisis pour le délai sont erronés!");
         }
         notifierObservateurs();
+        this.effacerLaSelection();
     }
 
     public void setEcart(String e) throws UncorrectSettingsException {
@@ -254,6 +257,7 @@ public class MondeIG extends SujetObserve {
             throw new UncorrectSettingsException("Les paramètres saisis pour l'écart sont erronés!");
         }
         notifierObservateurs();
+        this.effacerLaSelection();
     }
 
     public void setStyle(int i) {

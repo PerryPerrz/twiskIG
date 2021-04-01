@@ -33,6 +33,7 @@ public class VueArcIG extends Pane implements Observateur {
 
         ligne.setOnMouseClicked(MouseEvent -> monde.selectionArc(this.arc));
         triangle.setOnMouseClicked(MouseEvent -> monde.selectionArc(this.arc));
+        this.setPickOnBounds(false);
     }
 
     public void reagir() {
