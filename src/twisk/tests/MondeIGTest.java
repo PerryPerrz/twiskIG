@@ -13,16 +13,31 @@ import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * La classe MondeIGTest.
+ */
 class MondeIGTest {
+    /**
+     * Le monde.
+     */
     MondeIG monde;
+    /**
+     * La fabrique.
+     */
     FabriqueIdentifiant fab = FabriqueIdentifiant.getInstance();
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         fab.reset();
         monde = new MondeIG();
     }
 
+    /**
+     * Ajouter.
+     */
     @Test
     void ajouter() {
         assertEquals(monde.nbEtapes(), 1);
@@ -32,6 +47,9 @@ class MondeIGTest {
         assertEquals(monde.nbEtapes(), 2);
     }
 
+    /**
+     * Iterator.
+     */
     @Test
     void iterator() {
         int cpt = 0;
@@ -74,14 +92,23 @@ class MondeIGTest {
         assertEquals(cpt, 8);
     }
 
+    /**
+     * Ajouter vue.
+     */
     @Test
     void ajouterVue() {
     }
 
+    /**
+     * Prevenir vues.
+     */
     @Test
     void prevenirVues() {
     }
 
+    /**
+     * Test ajouter.
+     */
     @Test
     void testAjouter() {
         monde.ajouter("Activite");
@@ -114,6 +141,9 @@ class MondeIGTest {
         assertEquals(monde.getNbArcs(), 2);
     }
 
+    /**
+     * Supprimer.
+     */
     @Test
     void supprimer() {
         monde.ajouter("Activite");

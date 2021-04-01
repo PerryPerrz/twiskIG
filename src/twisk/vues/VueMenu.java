@@ -13,6 +13,9 @@ import twisk.outils.TailleComposants;
 
 import java.util.Optional;
 
+/**
+ * La classe VueMenu.
+ */
 public class VueMenu extends MenuBar implements Observateur {
     private final MondeIG monde;
     private final Menu fichier;
@@ -21,6 +24,11 @@ public class VueMenu extends MenuBar implements Observateur {
     private final Menu parametres;
     private final Menu style;
 
+    /**
+     * Constructeur de la classe VueMenu.
+     *
+     * @param monde the monde
+     */
     public VueMenu(MondeIG monde) {
         this.monde = monde;
         monde.ajouterObservateur(this);
@@ -147,6 +155,9 @@ public class VueMenu extends MenuBar implements Observateur {
         parametres.getItems().get(1).setDisable(monde.nbEtapesSelectionnees() != 1);//On disable écart
     }
 
+    /**
+     * Rename.
+     */
     public void rename() {
         TextInputDialog dialog = new TextInputDialog("Balançoire");
         dialog.setTitle("Renommer la sélection");
@@ -163,6 +174,9 @@ public class VueMenu extends MenuBar implements Observateur {
         result.ifPresent(name -> this.monde.renommerLaSelection(name));
     }
 
+    /**
+     * Delai.
+     */
     public void delai() {
         TextInputDialog dialog = new TextInputDialog("10");
         dialog.setTitle("Délai d'une activité");
@@ -197,6 +211,9 @@ public class VueMenu extends MenuBar implements Observateur {
         });
     }
 
+    /**
+     * Ecart.
+     */
     public void ecart() {
         TextInputDialog dialog = new TextInputDialog("10");
         dialog.setTitle("Écart d'une activité");

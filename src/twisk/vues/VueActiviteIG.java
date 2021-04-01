@@ -6,9 +6,18 @@ import twisk.designPattern.Observateur;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
+/**
+ * La classe VueActiviteIG.
+ */
 public class VueActiviteIG extends VueEtapeIG implements Observateur {
     private final HBox box;
 
+    /**
+     * Constructeur de la classe VueActiviteIG
+     *
+     * @param monde le monde
+     * @param etape l'etape
+     */
     public VueActiviteIG(MondeIG monde, EtapeIG etape) {
         super(monde, etape);
         box = new HBox();

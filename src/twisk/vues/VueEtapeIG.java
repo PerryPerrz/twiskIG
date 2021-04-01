@@ -1,8 +1,10 @@
 package twisk.vues;
 
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -14,11 +16,29 @@ import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.TailleComposants;
 
+/**
+ * La classe de VueEtapeIG.
+ */
 public abstract class VueEtapeIG extends VBox implements Observateur {
+    /**
+     * Le Monde.
+     */
     protected final MondeIG monde;
+    /**
+     * L'Etape.
+     */
     protected final EtapeIG etape;
+    /**
+     * Le Label.
+     */
     protected final Label label;
 
+    /**
+     * Constructeur de la classe VueEtapeIG.
+     *
+     * @param monde le monde
+     * @param etape l'etape
+     */
     public VueEtapeIG(MondeIG monde, EtapeIG etape) {
         this.monde = monde;
         this.etape = etape;
@@ -47,8 +67,15 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         this.setMaxSize(tc.getLargAct(), tc.getHautAct()); //Taille max de l'activité
     }
 
+    /**
+     * Sets mouse.
+     *
+     * @param mouseEvent the mouse event
+     */
     public void setMouse(MouseEvent mouseEvent) {
         Dragboard dragboard = this.startDragAndDrop(TransferMode.MOVE); //Presse-papier qui contient les infos du drag'n drop
+        WritableImage snapShot = this.snapshot(new SnapshotParameters(), null);
+        dragboard.setDragView(snapShot);
         ClipboardContent content = new ClipboardContent(); //On créer un clipboard qui contient l'id de l'étape
         content.putString(etape.getIdentifiant());
         dragboard.setContent(content);

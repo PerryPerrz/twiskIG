@@ -7,15 +7,27 @@ import twisk.mondeIG.PointDeControleIG;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * La classe PointDeControleIGTest.
+ */
 class PointDeControleIGTest {
+    /**
+     * Le point de contrôle.
+     */
     PointDeControleIG pdc;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         ActiviteIG act = new ActiviteIG("Balançoire", "0");
         pdc = new PointDeControleIG("0", act);
     }
 
+    /**
+     * Sets centre.
+     */
     @Test
     void setCentre() {
         pdc.setCentre(0, 0);

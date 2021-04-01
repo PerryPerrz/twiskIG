@@ -10,20 +10,20 @@ import twisk.vues.VueMenu;
 import twisk.vues.VueMondeIG;
 import twisk.vues.VueOutils;
 
+/**
+ * La classe MainTwisk.
+ */
 public class MainTwisk extends Application {
     /**
      * Procédure main qui permet de lancer l'application
      *
-     * @param args
+     * @param args the input arguments
      */
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    /**
-     * Procédure start qui créer la fenêtre de l'application
-     */
     public void start(Stage primaryStage) throws Exception {
         MondeIG monde = new MondeIG();
         BorderPane root = new BorderPane();

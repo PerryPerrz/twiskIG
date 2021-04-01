@@ -16,10 +16,19 @@ import twisk.mondeIG.MondeIG;
 import twisk.mondeIG.PointDeControleIG;
 import twisk.outils.TailleComposants;
 
+/**
+ * La classe VuePointDeControleIG.
+ */
 public class VuePointDeControleIG extends Circle implements Observateur {
     private final MondeIG monde;
     private final PointDeControleIG pdc;
 
+    /**
+     * Constructeur de la classe VuePointDeControleIG.
+     *
+     * @param monde le monde
+     * @param pdc   le pdc
+     */
     public VuePointDeControleIG(MondeIG monde, PointDeControleIG pdc) {
         TailleComposants tc = TailleComposants.getInstance();
         this.monde = monde;
@@ -83,6 +92,4 @@ public class VuePointDeControleIG extends Circle implements Observateur {
         this.setCenterX(this.pdc.getCentreX());
         this.setCenterY(this.pdc.getCentreY());
     }
-
-
 }

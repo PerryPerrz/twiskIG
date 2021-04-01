@@ -4,14 +4,26 @@ import twisk.outils.FabriqueIdentifiant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * La classe FabriqueIdentifiantTest.
+ */
 class FabriqueIdentifiantTest {
+    /**
+     * La fabrique.
+     */
     FabriqueIdentifiant fabID;
 
+    /**
+     * Sets up.
+     */
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         fabID = FabriqueIdentifiant.getInstance();
     }
 
+    /**
+     * Gets identifiant etape.
+     */
     @org.junit.jupiter.api.Test
     void getIdentifiantEtape() {
         String id = fabID.getIdentifiantEtape();

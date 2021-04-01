@@ -12,9 +12,17 @@ import twisk.outils.TailleComposants;
 
 import java.util.Iterator;
 
+/**
+ * La classe VueMondeIG.
+ */
 public class VueMondeIG extends Pane implements Observateur {
     private final MondeIG monde;
 
+    /**
+     * Constructeur de la classe VueMOndeIG.
+     *
+     * @param monde le monde
+     */
     public VueMondeIG(MondeIG monde) {
         this.monde = monde;
         monde.ajouterObservateur(this);

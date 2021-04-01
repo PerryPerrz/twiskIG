@@ -11,12 +11,21 @@ import twisk.mondeIG.MondeIG;
 import twisk.mondeIG.PointDeControleIG;
 import twisk.outils.TailleComposants;
 
+/**
+ * La classe VueArcIG.
+ */
 public class VueArcIG extends Pane implements Observateur {
     private final MondeIG monde;
     private final ArcIG arc;
     private final Line ligne;
     private final Polyline triangle;
 
+    /**
+     * Constructeur de la classe VueArcIG.
+     *
+     * @param monde le monde
+     * @param arc   l'arc
+     */
     public VueArcIG(MondeIG monde, ArcIG arc) {
         this.monde = monde;
         monde.ajouterObservateur(this);
@@ -48,6 +57,12 @@ public class VueArcIG extends Pane implements Observateur {
         }
     }
 
+    /**
+     * Apparition de la ligne.
+     *
+     * @param pdc1 le pdc 1
+     * @param pdc2 le pdc 2
+     */
     public void apparitionDeLaLigne(PointDeControleIG pdc1, PointDeControleIG pdc2) {
         this.ligne.setStartX(pdc1.getCentreX());
         this.ligne.setStartY(pdc1.getCentreY());
@@ -55,6 +70,9 @@ public class VueArcIG extends Pane implements Observateur {
         this.ligne.setEndY(pdc2.getCentreY());
     }
 
+    /**
+     * Apparition du triangle.
+     */
     //Fonction qui calcule l'orientation de la flèche
     public void apparitionDuTriangle() {
         TailleComposants tc = TailleComposants.getInstance();

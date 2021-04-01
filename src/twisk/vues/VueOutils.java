@@ -10,10 +10,18 @@ import twisk.mondeIG.MondeIG;
 import twisk.outils.TailleComposants;
 
 
+/**
+ * La classe VueOutils.
+ */
 public class VueOutils extends TilePane implements Observateur {
     private final MondeIG monde;
     private final Button bouton;
 
+    /**
+     * Constructeur de la classe VueOutils.
+     *
+     * @param monde le monde
+     */
     public VueOutils(MondeIG monde) {
         this.monde = monde;
         monde.ajouterObservateur(this);
